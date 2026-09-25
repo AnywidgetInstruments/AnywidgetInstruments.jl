@@ -4,6 +4,7 @@
 
 ```julia
 using Pkg
+Pkg.add(url = "https://github.com/s-celles/Anywidget.jl")   # until both are registered
 Pkg.add(url = "https://github.com/s-celles/AnywidgetInstruments.jl")
 ```
 
@@ -90,8 +91,10 @@ merge_traits(Dict("_kind" => "tank", "value" => 1.0); value = 2.5, label = "T-10
 
 ## Displaying widgets
 
-A widget has a `text/html` representation: it runs the front-end module in the
-page with a model holding its traits. It displays wherever HTML is shown:
+Widgets are hosted by [Anywidget.jl](https://github.com/s-celles/Anywidget.jl):
+an [`Instrument`](@ref) is an `Anywidget.AbstractAnywidget`. Its `text/html`
+representation runs the front-end module in the page with a model holding its
+traits. It displays wherever HTML is shown:
 Documenter (as on these pages), VS Code, Jupyter with IJulia, Pluto. The
 operator can use the widget in the page, but there is no kernel: its actions
 do not come back to Julia (use [Kaimon Slate](kaimonslate.md) for that).
@@ -104,7 +107,7 @@ By default each output is self-contained: the module and the styles are
 inlined (about 1 MB). Point the display at a copy of the assets to avoid it:
 
 ```julia
-AnywidgetInstruments.set_asset_base!("https://example.org/awi/")   # serves index.js and index.css
+set_asset_base!(frontend_module(), "https://example.org/awi/")   # serves index.js and index.css
 ```
 
 `html_page` writes several widgets into one standalone page, the module

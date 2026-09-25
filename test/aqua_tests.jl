@@ -3,9 +3,9 @@
     Aqua.test_all(AnywidgetInstruments)
 end
 
-@testitem "core dependencies (JL-GEN-005)" begin
+@testitem "core dependencies (JL-GEN-005, JL-HOST-002)" begin
     using TOML
     project = TOML.parsefile(joinpath(pkgdir(AnywidgetInstruments), "Project.toml"))
-    @test Set(keys(project["deps"])) ⊆ Set(["JSON", "Base64", "UUIDs", "TOML"])
-    @test haskey(project["weakdeps"], "SlateExtensionsBase")
+    @test Set(keys(project["deps"])) ⊆ Set(["Anywidget", "JSON", "Base64", "TOML"])
+    @test !haskey(project, "weakdeps")          # hosts come from Anywidget.jl
 end

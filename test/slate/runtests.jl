@@ -3,9 +3,10 @@ using AnywidgetInstruments
 using SlateExtensionsBase
 using SlateAFM
 
-const Ext = Base.get_extension(AnywidgetInstruments, :AnywidgetInstrumentsSlateExt)
+using Anywidget
+const Ext = Base.get_extension(Anywidget, :AnywidgetSlateExt)
 
-@testset "KaimonSlate.jl extension" begin
+@testset "Kaimon Slate through Anywidget.jl" begin
     @test Ext !== nothing
 
     @testset "to_widget (JL-SLATE-001)" begin
@@ -17,20 +18,21 @@ const Ext = Base.get_extension(AnywidgetInstruments, :AnywidgetInstrumentsSlateE
         @test w.default["value"] == 3.2
         @test w.default["max"] == 4
         @test haskey(w.default, "ticks")                     # defaults filled in
-        @test w.params["src"] == "/ext-assets/AnywidgetInstrumentsSlateExt/index.js"
-        @test w.params["css"] == ["/ext-assets/AnywidgetInstrumentsSlateExt/index.css"]
+        @test w.params["src"] == "/ext-assets/Anywidget.anywidget-instruments/index.js"
+        @test w.params["css"] == ["/ext-assets/Anywidget.anywidget-instruments/index.css"]
         @test w.params["id"] == "level"
     end
 
-    @testset "served assets (JL-SLATE-002)" begin
+    @testset "served front end (JL-SLATE-001)" begin
         handlers = Dict{String,Any}()
         Ext.__slate_frontend((ch, f) -> (handlers[ch] = f))
-        @test SlateExtensionsBase._ASSETS["AnywidgetInstrumentsSlateExt"] == abspath(AnywidgetInstruments.assets_dir())
+        @test SlateExtensionsBase._ASSETS["Anywidget.anywidget-instruments"] ==
+            abspath(AnywidgetInstruments.assets_dir())
         @test isempty(handlers)   # incoming messages stay with SlateAFM
     end
 
-    @testset "transport through SlateAFM (JL-SLATE-003)" begin
-        @test AnywidgetInstruments.TRANSPORT[] === Ext.slate_transport
+    @testset "transport through SlateAFM (JL-MSG-006)" begin
+        @test Anywidget.transport() === Ext.slate_transport
         sent = []
         emit = (channel, value) -> push!(sent, (channel, value))
         task_local_storage(:slate_ctx, (; emit=emit)) do

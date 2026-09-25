@@ -35,6 +35,16 @@ Version of anywidget-instruments whose front end is vendored (JL-CON-001).
 """
 frontend_version() = String(CONTRACT["version"])
 
+const FRONTEND = FrontendModule("anywidget-instruments"; dir=ASSETS_DIR, esm="index.js", css=["index.css"])
+
+"""
+    frontend_module() -> Anywidget.FrontendModule
+
+The front-end module of anywidget-instruments, as hosted by Anywidget.jl. Pass
+it to `set_asset_base!` to load the module from a URL instead of inlining it.
+"""
+frontend_module() = FRONTEND
+
 const CLASSES = sort!([String(k) for (k, w) in CONTRACT["widgets"] if !w["abstract"]])
 
 """

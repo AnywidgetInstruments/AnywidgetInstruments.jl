@@ -12,7 +12,7 @@ Build one with the class constructors (`Tank(3.2; max = 4)`) or
 `w[:value] = 2.0`. [`traits`](@ref) gives the dictionary a host binds the
 front end to.
 """
-struct Instrument
+struct Instrument <: AbstractAnywidget
     class::String
     id::String
     traits::Dict{String,Any}
@@ -45,7 +45,13 @@ function instrument(class::Union{AbstractString,Symbol}, value; kw...)
     return instrument(class; value=value, kw...)
 end
 
-_new_id() = "awi-" * string(uuid4())
+_new_id() = "awi-" * Anywidget.new_id()[5:end]
+
+# Anywidget.jl interface (JL-HOST-001): the HTML display, html_page,
+# send_message and the Kaimon Slate integration come with it.
+Anywidget.afm_module(::Instrument) = FRONTEND
+Anywidget.widget_traits(w::Instrument) = traits(w; defaults=true)
+Anywidget.message_id(w::Instrument) = w.id
 
 """
     widget_class(w::Instrument) -> String

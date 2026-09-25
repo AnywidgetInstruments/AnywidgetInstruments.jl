@@ -1,17 +1,5 @@
-# Custom messages between a host and the front end (JL-MSG-*).
-
-"""
-    Message(content, buffers = Vector{UInt8}[])
-
-A custom message: its JSON `content` (with a `"type"` field) and its binary
-buffers, sent with it in order (little-endian bytes, see
-[`encode_buffer`](@ref)).
-"""
-struct Message
-    content::Dict{String,Any}
-    buffers::Vector{Vector{UInt8}}
-end
-Message(content::AbstractDict) = Message(Dict{String,Any}(content), Vector{UInt8}[])
+# Messages of the instruments (JL-MSG-*), built on Anywidget.Message; sending
+# goes through the transport of Anywidget.jl (send_message, set_transport!).
 
 function _message_spec(w::Instrument, type::AbstractString)
     for m in message_specs(w.class)
@@ -104,35 +92,4 @@ function _pens_message(w, type, times, values, totals)
         push!(buffers, encode_buffer(tdtype, t), encode_buffer(vdtype, v))
     end
     return Message(Dict{String,Any}("type" => type, "pens" => entries), buffers)
-end
-
-# ── Transport (JL-MSG-006) ─────────────────────────────────────────────────────
-
-const TRANSPORT = Ref{Any}(nothing)
-
-"""
-    set_transport!(f)
-
-Install the function sending messages to the front end: `f(id, msg::Message)`,
-`id` being the widget's message id. Host integrations install one (the
-KaimonSlate.jl extension sends through SlateAFM); `nothing` removes it.
-"""
-set_transport!(f) = (TRANSPORT[]=f; nothing)
-
-"""
-    send_message(w, msg::Message)
-    send_message(id, msg::Message)
-
-Send a message to the views of widget `w` (or of message id `id`) through the
-installed transport (see [`set_transport!`](@ref)).
-"""
-send_message(w::Instrument, msg::Message) = send_message(w.id, msg)
-function send_message(id::AbstractString, msg::Message)
-    f = TRANSPORT[]
-    f === nothing && error(
-        "no message transport installed: load a host integration (in KaimonSlate.jl: " *
-        "`using SlateAFM, AnywidgetInstruments`) or call AnywidgetInstruments.set_transport!((id, msg) -> …)",
-    )
-    f(String(id), msg)
-    return nothing
 end

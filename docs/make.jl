@@ -4,7 +4,7 @@ using AnywidgetInstruments
 
 # Live widgets in the pages load the front end from the site (copied below)
 # instead of inlining 1 MB per output. Pages are one level deep (prettyurls).
-AnywidgetInstruments.set_asset_base!("../assets/awi/")
+set_asset_base!(frontend_module(), "../assets/awi/")
 
 const PAGES = [
     "Home" => "index.md",
