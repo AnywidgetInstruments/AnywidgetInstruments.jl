@@ -1,0 +1,12 @@
+[deps]
+AnywidgetInstruments = "e0d2496c-6fa3-4e1c-a794-43e51ccdd4a3"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+DocumenterLandingPage = "1c52b33b-3e2f-4e99-b3b5-a6ad63f0d6d2"
+Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
+
+[sources]
+AnywidgetInstruments = {path = ".."}
+
+[compat]
+Documenter = "1"
+DocumenterLandingPage = "0.2"

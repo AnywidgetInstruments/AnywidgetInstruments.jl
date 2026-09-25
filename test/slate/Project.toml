@@ -1,0 +1,12 @@
+[deps]
+AnywidgetInstruments = "e0d2496c-6fa3-4e1c-a794-43e51ccdd4a3"
+SlateAFM = "48bdd467-e615-4c42-bca2-e391cca8438c"
+SlateExtensionsBase = "bc31d39e-4442-48fa-b9ae-1bd99fed63f7"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[sources]
+AnywidgetInstruments = {path = "../.."}
+SlateAFM = {rev = "main", subdir = "examples/extensions/SlateAFM", url = "https://github.com/kahliburke/KaimonSlate.jl"}
+
+[compat]
+julia = "1.12"
