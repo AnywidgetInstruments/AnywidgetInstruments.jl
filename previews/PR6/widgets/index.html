@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Widgets · AnywidgetInstruments.jl</title><meta name="title" content="Widgets · AnywidgetInstruments.jl"/><meta property="og:title" content="Widgets · AnywidgetInstruments.jl"/><meta property="twitter:title" content="Widgets · AnywidgetInstruments.jl"/><meta name="description" content="Documentation for AnywidgetInstruments.jl."/><meta property="og:description" content="Documentation for AnywidgetInstruments.jl."/><meta property="twitter:description" content="Documentation for AnywidgetInstruments.jl."/><meta property="og:url" content="https://s-celles.github.io/AnywidgetInstruments.jl/widgets/"/><meta property="twitter:url" content="https://s-celles.github.io/AnywidgetInstruments.jl/widgets/"/><link rel="canonical" href="https://s-celles.github.io/AnywidgetInstruments.jl/widgets/"/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.63.2/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script><link href="../assets/documenterlandingpage/landing.css" rel="stylesheet" type="text/css"/></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">AnywidgetInstruments.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><a class="tocitem" href="../getting-started/">Getting started</a></li><li class="is-active"><a class="tocitem" href>Widgets</a><ul class="internal"><li><a class="tocitem" href="#Numeric-controls-and-indicators"><span>Numeric controls and indicators</span></a></li><li><a class="tocitem" href="#Boolean-controls-and-indicators"><span>Boolean controls and indicators</span></a></li><li><a class="tocitem" href="#Process-objects"><span>Process objects</span></a></li><li><a class="tocitem" href="#Every-class"><span>Every class</span></a></li></ul></li><li><a class="tocitem" href="../kaimonslate/">Kaimon Slate</a></li><li><a class="tocitem" href="../messages/">Messages</a></li><li><a class="tocitem" href="../rules/">Shared rules</a></li><li><a class="tocitem" href="../api/">API reference</a></li><li><a class="tocitem" href="../specification/">Specification</a></li><li><a class="tocitem" href="../roadmap/">Roadmap</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Widgets</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Widgets</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/s-celles/AnywidgetInstruments.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/s-celles/AnywidgetInstruments.jl/blob/main/docs/src/widgets.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Widgets"><a class="docs-heading-anchor" href="#Widgets">Widgets</a><a id="Widgets-1"></a><a class="docs-heading-anchor-permalink" href="#Widgets" title="Permalink"></a></h1><p>These widgets run live on this page: drag the knob, press the buttons. The behaviour of each widget is specified by <a href="https://s-celles.github.io/anywidget-instruments/widgets/">anywidget-instruments</a>; the traits of each class are listed in the <a href="../api/#Widget-constructors">API reference</a>.</p><h2 id="Numeric-controls-and-indicators"><a class="docs-heading-anchor" href="#Numeric-controls-and-indicators">Numeric controls and indicators</a><a id="Numeric-controls-and-indicators-1"></a><a class="docs-heading-anchor-permalink" href="#Numeric-controls-and-indicators" title="Permalink"></a></h2><pre><code class="language-julia hljs">Knob(2.5; min = 0, max = 10, step = 0.1, unit = &quot;dB&quot;, label = &quot;Gain&quot;)</code></pre><div id="afm-6dc9a5ba-8995-46a7-a726-3998b5b3ae8b" class="afm-host"></div>
+<script type="application/json" id="afm-6dc9a5ba-8995-46a7-a726-3998b5b3ae8b-traits">{"_heartbeat":0,"_kind":"knob","_session":"","alarm_level":"normal","angle_range":270,"animate":false,"animation_ms":200,"coerce":false,"deadband":0,"disabled":false,"eng_max":null,"eng_min":null,"entry":true,"format":"%.1f","hi":null,"hihi":null,"label":"Gain","lo":null,"lolo":null,"max":10,"min":0,"minor_ticks":4,"mode":"control","raw_max":null,"raw_min":null,"scale":"linear","show_limits":false,"size":[160,160],"skin":{},"step":0.1,"style":"modern","theme":"auto","ticks":5,"tooltip":"","unit":"dB","update_rate":30,"value":2.5,"value_labels":[],"visible":true}</script>
+<script type="module">
+const afmLoad = (spec) => {
+  const cache = (window.__afmModules ||= {});
+  if (cache[spec.name]) return cache[spec.name];
+  const text = (sel, i) => {
+    const el = document.querySelectorAll(sel)[i || 0];
+    const bin = atob(el.textContent);
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  };
+  let inline = 0;
+  spec.css.forEach((url) => {
+    const key = spec.name + ":" + (url || inline);
+    if (!document.querySelector(`[data-afm-style="${CSS.escape(key)}"]`)) {
+      const style = document.createElement(url ? "link" : "style");
+      style.setAttribute("data-afm-style", key);
+      if (url) { style.rel = "stylesheet"; style.href = url; }
+      else style.textContent = text(`script[data-afm-css="${CSS.escape(spec.name)}"]`, inline);
+      document.head.appendChild(style);
+    }
+    if (!url) inline += 1;
+  });
+  const url = spec.esm || URL.createObjectURL(new Blob(
+    [text(`script[data-afm-esm="${CSS.escape(spec.name)}"]`)], { type: "text/javascript" }));
+  cache[spec.name] = import(url).then((m) => m.default);
+  return cache[spec.name];
+};
+const afmModel = (traits) => {
+  const handlers = {};
+  const fire = (ev, ...a) => (handlers[ev] || []).slice().forEach((h) => h(...a));
+  return {
+    get: (k) => traits[k],
+    set(k, v) {
+      if (JSON.stringify(traits[k]) === JSON.stringify(v)) return;
+      traits[k] = v;
+      fire(`change:${k}`);
+    },
+    save_changes: () => {},
+    on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+    off: (ev, cb) => (handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb)),
+    send: () => {},
+  };
+};
+const el = document.getElementById("afm-6dc9a5ba-8995-46a7-a726-3998b5b3ae8b");
+const traits = JSON.parse(document.getElementById("afm-6dc9a5ba-8995-46a7-a726-3998b5b3ae8b-traits").textContent);
+const afm = await afmLoad({"css":["../assets/awi/index.css"],"esm":"../assets/awi/index.js","name":"anywidget-instruments"});
+const model = afmModel(traits);
+await afm.initialize?.({ model });
+await afm.render({ model, el });
+</script>
+<pre><code class="language-julia hljs">Gauge(72.0; hi = 80, hihi = 90, show_limits = true, unit = &quot;bar&quot;, label = &quot;Pressure&quot;)</code></pre><div id="afm-729d9c6e-b893-4d3d-bf0d-56e107cc3f1b" class="afm-host"></div>
+<script type="application/json" id="afm-729d9c6e-b893-4d3d-bf0d-56e107cc3f1b-traits">{"_heartbeat":0,"_kind":"gauge","_session":"","alarm_level":"normal","animate":false,"animation_ms":200,"coerce":false,"deadband":0,"disabled":false,"eng_max":null,"eng_min":null,"entry":true,"format":"%.1f","hi":80,"hihi":90,"label":"Pressure","lo":null,"lolo":null,"max":100,"min":0,"minor_ticks":4,"mode":"indicator","peak":null,"peak_decay":0,"peak_hold":false,"ranges":[],"raw_max":null,"raw_min":null,"scale":"linear","setpoint":null,"show_limits":true,"size":[160,160],"skin":{},"step":0,"style":"modern","theme":"auto","ticks":5,"tooltip":"","unit":"bar","update_rate":30,"value":72.0,"value_labels":[],"variant":"circular","visible":true}</script>
+<script type="module">
+const afmLoad = (spec) => {
+  const cache = (window.__afmModules ||= {});
+  if (cache[spec.name]) return cache[spec.name];
+  const text = (sel, i) => {
+    const el = document.querySelectorAll(sel)[i || 0];
+    const bin = atob(el.textContent);
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  };
+  let inline = 0;
+  spec.css.forEach((url) => {
+    const key = spec.name + ":" + (url || inline);
+    if (!document.querySelector(`[data-afm-style="${CSS.escape(key)}"]`)) {
+      const style = document.createElement(url ? "link" : "style");
+      style.setAttribute("data-afm-style", key);
+      if (url) { style.rel = "stylesheet"; style.href = url; }
+      else style.textContent = text(`script[data-afm-css="${CSS.escape(spec.name)}"]`, inline);
+      document.head.appendChild(style);
+    }
+    if (!url) inline += 1;
+  });
+  const url = spec.esm || URL.createObjectURL(new Blob(
+    [text(`script[data-afm-esm="${CSS.escape(spec.name)}"]`)], { type: "text/javascript" }));
+  cache[spec.name] = import(url).then((m) => m.default);
+  return cache[spec.name];
+};
+const afmModel = (traits) => {
+  const handlers = {};
+  const fire = (ev, ...a) => (handlers[ev] || []).slice().forEach((h) => h(...a));
+  return {
+    get: (k) => traits[k],
+    set(k, v) {
+      if (JSON.stringify(traits[k]) === JSON.stringify(v)) return;
+      traits[k] = v;
+      fire(`change:${k}`);
+    },
+    save_changes: () => {},
+    on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+    off: (ev, cb) => (handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb)),
+    send: () => {},
+  };
+};
+const el = document.getElementById("afm-729d9c6e-b893-4d3d-bf0d-56e107cc3f1b");
+const traits = JSON.parse(document.getElementById("afm-729d9c6e-b893-4d3d-bf0d-56e107cc3f1b-traits").textContent);
+const afm = await afmLoad({"css":["../assets/awi/index.css"],"esm":"../assets/awi/index.js","name":"anywidget-instruments"});
+const model = afmModel(traits);
+await afm.initialize?.({ model });
+await afm.render({ model, el });
+</script>
+<pre><code class="language-julia hljs">Thermometer(64.0; min = 0, max = 100, unit = &quot;°C&quot;, hi = 85, show_limits = true, label = &quot;TT-101&quot;)</code></pre><div id="afm-f15e9dff-ef82-4403-b6ce-37567d6bfdba" class="afm-host"></div>
+<script type="application/json" id="afm-f15e9dff-ef82-4403-b6ce-37567d6bfdba-traits">{"_heartbeat":0,"_kind":"thermometer","_session":"","alarm_level":"normal","animate":false,"animation_ms":200,"coerce":false,"deadband":0,"disabled":false,"eng_max":null,"eng_min":null,"entry":true,"fill_color":"","format":"%.1f","hi":85,"hihi":null,"label":"TT-101","lo":null,"lolo":null,"max":100,"min":0,"minor_ticks":4,"mode":"indicator","raw_max":null,"raw_min":null,"scale":"linear","show_limits":true,"size":[100,220],"skin":{},"step":0,"style":"modern","theme":"auto","ticks":7,"tooltip":"","unit":"°C","update_rate":30,"value":64.0,"value_labels":[],"visible":true}</script>
+<script type="module">
+const afmLoad = (spec) => {
+  const cache = (window.__afmModules ||= {});
+  if (cache[spec.name]) return cache[spec.name];
+  const text = (sel, i) => {
+    const el = document.querySelectorAll(sel)[i || 0];
+    const bin = atob(el.textContent);
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  };
+  let inline = 0;
+  spec.css.forEach((url) => {
+    const key = spec.name + ":" + (url || inline);
+    if (!document.querySelector(`[data-afm-style="${CSS.escape(key)}"]`)) {
+      const style = document.createElement(url ? "link" : "style");
+      style.setAttribute("data-afm-style", key);
+      if (url) { style.rel = "stylesheet"; style.href = url; }
+      else style.textContent = text(`script[data-afm-css="${CSS.escape(spec.name)}"]`, inline);
+      document.head.appendChild(style);
+    }
+    if (!url) inline += 1;
+  });
+  const url = spec.esm || URL.createObjectURL(new Blob(
+    [text(`script[data-afm-esm="${CSS.escape(spec.name)}"]`)], { type: "text/javascript" }));
+  cache[spec.name] = import(url).then((m) => m.default);
+  return cache[spec.name];
+};
+const afmModel = (traits) => {
+  const handlers = {};
+  const fire = (ev, ...a) => (handlers[ev] || []).slice().forEach((h) => h(...a));
+  return {
+    get: (k) => traits[k],
+    set(k, v) {
+      if (JSON.stringify(traits[k]) === JSON.stringify(v)) return;
+      traits[k] = v;
+      fire(`change:${k}`);
+    },
+    save_changes: () => {},
+    on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+    off: (ev, cb) => (handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb)),
+    send: () => {},
+  };
+};
+const el = document.getElementById("afm-f15e9dff-ef82-4403-b6ce-37567d6bfdba");
+const traits = JSON.parse(document.getElementById("afm-f15e9dff-ef82-4403-b6ce-37567d6bfdba-traits").textContent);
+const afm = await afmLoad({"css":["../assets/awi/index.css"],"esm":"../assets/awi/index.js","name":"anywidget-instruments"});
+const model = afmModel(traits);
+await afm.initialize?.({ model });
+await afm.render({ model, el });
+</script>
+<pre><code class="language-julia hljs">SevenSegment(1234.5; digits = 6, max = 10_000, label = &quot;Counter&quot;)</code></pre><div id="afm-0aa9db1a-3f8d-473f-ad4d-93fbadf0faa2" class="afm-host"></div>
+<script type="application/json" id="afm-0aa9db1a-3f8d-473f-ad4d-93fbadf0faa2-traits">{"_heartbeat":0,"_kind":"sevensegment","_session":"","alarm_level":"normal","animate":false,"animation_ms":200,"coerce":false,"color":"","deadband":0,"decimals":1,"digits":6,"disabled":false,"eng_max":null,"eng_min":null,"entry":true,"format":"%.1f","hi":null,"hihi":null,"label":"Counter","lo":null,"lolo":null,"max":10000,"min":-1000000000,"minor_ticks":4,"mode":"indicator","raw_max":null,"raw_min":null,"scale":"linear","show_limits":false,"size":[200,80],"skin":{},"step":0,"style":"modern","theme":"auto","ticks":5,"tooltip":"","unit":"","update_rate":30,"value":1234.5,"value_labels":[],"visible":true}</script>
+<script type="module">
+const afmLoad = (spec) => {
+  const cache = (window.__afmModules ||= {});
+  if (cache[spec.name]) return cache[spec.name];
+  const text = (sel, i) => {
+    const el = document.querySelectorAll(sel)[i || 0];
+    const bin = atob(el.textContent);
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  };
+  let inline = 0;
+  spec.css.forEach((url) => {
+    const key = spec.name + ":" + (url || inline);
+    if (!document.querySelector(`[data-afm-style="${CSS.escape(key)}"]`)) {
+      const style = document.createElement(url ? "link" : "style");
+      style.setAttribute("data-afm-style", key);
+      if (url) { style.rel = "stylesheet"; style.href = url; }
+      else style.textContent = text(`script[data-afm-css="${CSS.escape(spec.name)}"]`, inline);
+      document.head.appendChild(style);
+    }
+    if (!url) inline += 1;
+  });
+  const url = spec.esm || URL.createObjectURL(new Blob(
+    [text(`script[data-afm-esm="${CSS.escape(spec.name)}"]`)], { type: "text/javascript" }));
+  cache[spec.name] = import(url).then((m) => m.default);
+  return cache[spec.name];
+};
+const afmModel = (traits) => {
+  const handlers = {};
+  const fire = (ev, ...a) => (handlers[ev] || []).slice().forEach((h) => h(...a));
+  return {
+    get: (k) => traits[k],
+    set(k, v) {
+      if (JSON.stringify(traits[k]) === JSON.stringify(v)) return;
+      traits[k] = v;
+      fire(`change:${k}`);
+    },
+    save_changes: () => {},
+    on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+    off: (ev, cb) => (handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb)),
+    send: () => {},
+  };
+};
+const el = document.getElementById("afm-0aa9db1a-3f8d-473f-ad4d-93fbadf0faa2");
+const traits = JSON.parse(document.getElementById("afm-0aa9db1a-3f8d-473f-ad4d-93fbadf0faa2-traits").textContent);
+const afm = await afmLoad({"css":["../assets/awi/index.css"],"esm":"../assets/awi/index.js","name":"anywidget-instruments"});
+const model = afmModel(traits);
+await afm.initialize?.({ model });
+await afm.render({ model, el });
+</script>
+<h2 id="Boolean-controls-and-indicators"><a class="docs-heading-anchor" href="#Boolean-controls-and-indicators">Boolean controls and indicators</a><a id="Boolean-controls-and-indicators-1"></a><a class="docs-heading-anchor-permalink" href="#Boolean-controls-and-indicators" title="Permalink"></a></h2><pre><code class="language-julia hljs">LED(true; label = &quot;Run&quot;)</code></pre><div id="afm-0cf46d1d-a33a-476e-8da0-dcb975f4a27d" class="afm-host"></div>
+<script type="application/json" id="afm-0cf46d1d-a33a-476e-8da0-dcb975f4a27d-traits">{"_heartbeat":0,"_kind":"led","_pressed":false,"_seq":0,"_session":"","blink":false,"blink_hz":2,"confirm":false,"default_state":false,"disabled":false,"label":"Run","latch_timeout":0,"mechanical_action":"switch_when_pressed","mode":"indicator","off_color":"","on_color":"#22c55e","shape":"round","size":[48,48],"skin":{},"style":"modern","theme":"auto","tooltip":"","value":true,"visible":true}</script>
+<script type="module">
+const afmLoad = (spec) => {
+  const cache = (window.__afmModules ||= {});
+  if (cache[spec.name]) return cache[spec.name];
+  const text = (sel, i) => {
+    const el = document.querySelectorAll(sel)[i || 0];
+    const bin = atob(el.textContent);
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  };
+  let inline = 0;
+  spec.css.forEach((url) => {
+    const key = spec.name + ":" + (url || inline);
+    if (!document.querySelector(`[data-afm-style="${CSS.escape(key)}"]`)) {
+      const style = document.createElement(url ? "link" : "style");
+      style.setAttribute("data-afm-style", key);
+      if (url) { style.rel = "stylesheet"; style.href = url; }
+      else style.textContent = text(`script[data-afm-css="${CSS.escape(spec.name)}"]`, inline);
+      document.head.appendChild(style);
+    }
+    if (!url) inline += 1;
+  });
+  const url = spec.esm || URL.createObjectURL(new Blob(
+    [text(`script[data-afm-esm="${CSS.escape(spec.name)}"]`)], { type: "text/javascript" }));
+  cache[spec.name] = import(url).then((m) => m.default);
+  return cache[spec.name];
+};
+const afmModel = (traits) => {
+  const handlers = {};
+  const fire = (ev, ...a) => (handlers[ev] || []).slice().forEach((h) => h(...a));
+  return {
+    get: (k) => traits[k],
+    set(k, v) {
+      if (JSON.stringify(traits[k]) === JSON.stringify(v)) return;
+      traits[k] = v;
+      fire(`change:${k}`);
+    },
+    save_changes: () => {},
+    on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+    off: (ev, cb) => (handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb)),
+    send: () => {},
+  };
+};
+const el = document.getElementById("afm-0cf46d1d-a33a-476e-8da0-dcb975f4a27d");
+const traits = JSON.parse(document.getElementById("afm-0cf46d1d-a33a-476e-8da0-dcb975f4a27d-traits").textContent);
+const afm = await afmLoad({"css":["../assets/awi/index.css"],"esm":"../assets/awi/index.js","name":"anywidget-instruments"});
+const model = afmModel(traits);
+await afm.initialize?.({ model });
+await afm.render({ model, el });
+</script>
+<pre><code class="language-julia hljs">PushButton(; text = &quot;START&quot;, color = &quot;green&quot;, label = &quot;Start&quot;)</code></pre><div id="afm-ee4c20f6-7240-45a3-a6ea-7c43bded26d9" class="afm-host"></div>
+<script type="application/json" id="afm-ee4c20f6-7240-45a3-a6ea-7c43bded26d9-traits">{"_heartbeat":0,"_kind":"pushbutton","_pressed":false,"_seq":0,"_session":"","color":"green","confirm":false,"default_state":false,"disabled":false,"label":"Start","lamp":null,"lamp_blink":false,"lamp_color":"green","latch_timeout":0,"mechanical_action":"latch_when_released","mode":"control","shape":"rect","size":[110,44],"skin":{},"style":"modern","text":"START","theme":"auto","tooltip":"","value":false,"visible":true}</script>
+<script type="module">
+const afmLoad = (spec) => {
+  const cache = (window.__afmModules ||= {});
+  if (cache[spec.name]) return cache[spec.name];
+  const text = (sel, i) => {
+    const el = document.querySelectorAll(sel)[i || 0];
+    const bin = atob(el.textContent);
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  };
+  let inline = 0;
+  spec.css.forEach((url) => {
+    const key = spec.name + ":" + (url || inline);
+    if (!document.querySelector(`[data-afm-style="${CSS.escape(key)}"]`)) {
+      const style = document.createElement(url ? "link" : "style");
+      style.setAttribute("data-afm-style", key);
+      if (url) { style.rel = "stylesheet"; style.href = url; }
+      else style.textContent = text(`script[data-afm-css="${CSS.escape(spec.name)}"]`, inline);
+      document.head.appendChild(style);
+    }
+    if (!url) inline += 1;
+  });
+  const url = spec.esm || URL.createObjectURL(new Blob(
+    [text(`script[data-afm-esm="${CSS.escape(spec.name)}"]`)], { type: "text/javascript" }));
+  cache[spec.name] = import(url).then((m) => m.default);
+  return cache[spec.name];
+};
+const afmModel = (traits) => {
+  const handlers = {};
+  const fire = (ev, ...a) => (handlers[ev] || []).slice().forEach((h) => h(...a));
+  return {
+    get: (k) => traits[k],
+    set(k, v) {
+      if (JSON.stringify(traits[k]) === JSON.stringify(v)) return;
+      traits[k] = v;
+      fire(`change:${k}`);
+    },
+    save_changes: () => {},
+    on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+    off: (ev, cb) => (handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb)),
+    send: () => {},
+  };
+};
+const el = document.getElementById("afm-ee4c20f6-7240-45a3-a6ea-7c43bded26d9");
+const traits = JSON.parse(document.getElementById("afm-ee4c20f6-7240-45a3-a6ea-7c43bded26d9-traits").textContent);
+const afm = await afmLoad({"css":["../assets/awi/index.css"],"esm":"../assets/awi/index.js","name":"anywidget-instruments"});
+const model = afmModel(traits);
+await afm.initialize?.({ model });
+await afm.render({ model, el });
+</script>
+<pre><code class="language-julia hljs">StackLight(; tiers = [&quot;red&quot;, &quot;amber&quot;, &quot;green&quot;], value = [&quot;off&quot;, &quot;blink&quot;, &quot;on&quot;], label = &quot;Stack light&quot;)</code></pre><div id="afm-d2a97c1c-2154-4b80-a1b6-6e1f60f8e5d8" class="afm-host"></div>
+<script type="application/json" id="afm-d2a97c1c-2154-4b80-a1b6-6e1f60f8e5d8-traits">{"_heartbeat":0,"_kind":"stacklight","_session":"","buzzer":false,"disabled":false,"label":"Stack light","labels":[],"mode":"indicator","size":[120,200],"skin":{},"style":"modern","theme":"auto","tiers":["red","amber","green"],"tooltip":"","value":["off","blink","on"],"visible":true}</script>
+<script type="module">
+const afmLoad = (spec) => {
+  const cache = (window.__afmModules ||= {});
+  if (cache[spec.name]) return cache[spec.name];
+  const text = (sel, i) => {
+    const el = document.querySelectorAll(sel)[i || 0];
+    const bin = atob(el.textContent);
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  };
+  let inline = 0;
+  spec.css.forEach((url) => {
+    const key = spec.name + ":" + (url || inline);
+    if (!document.querySelector(`[data-afm-style="${CSS.escape(key)}"]`)) {
+      const style = document.createElement(url ? "link" : "style");
+      style.setAttribute("data-afm-style", key);
+      if (url) { style.rel = "stylesheet"; style.href = url; }
+      else style.textContent = text(`script[data-afm-css="${CSS.escape(spec.name)}"]`, inline);
+      document.head.appendChild(style);
+    }
+    if (!url) inline += 1;
+  });
+  const url = spec.esm || URL.createObjectURL(new Blob(
+    [text(`script[data-afm-esm="${CSS.escape(spec.name)}"]`)], { type: "text/javascript" }));
+  cache[spec.name] = import(url).then((m) => m.default);
+  return cache[spec.name];
+};
+const afmModel = (traits) => {
+  const handlers = {};
+  const fire = (ev, ...a) => (handlers[ev] || []).slice().forEach((h) => h(...a));
+  return {
+    get: (k) => traits[k],
+    set(k, v) {
+      if (JSON.stringify(traits[k]) === JSON.stringify(v)) return;
+      traits[k] = v;
+      fire(`change:${k}`);
+    },
+    save_changes: () => {},
+    on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+    off: (ev, cb) => (handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb)),
+    send: () => {},
+  };
+};
+const el = document.getElementById("afm-d2a97c1c-2154-4b80-a1b6-6e1f60f8e5d8");
+const traits = JSON.parse(document.getElementById("afm-d2a97c1c-2154-4b80-a1b6-6e1f60f8e5d8-traits").textContent);
+const afm = await afmLoad({"css":["../assets/awi/index.css"],"esm":"../assets/awi/index.js","name":"anywidget-instruments"});
+const model = afmModel(traits);
+await afm.initialize?.({ model });
+await afm.render({ model, el });
+</script>
+<h2 id="Process-objects"><a class="docs-heading-anchor" href="#Process-objects">Process objects</a><a id="Process-objects-1"></a><a class="docs-heading-anchor-permalink" href="#Process-objects" title="Permalink"></a></h2><pre><code class="language-julia hljs">Valve(; mode = &quot;control&quot;, tag = &quot;XV-101&quot;, label = &quot;Feed valve&quot;)</code></pre><div id="afm-e98fe87d-5d3c-4104-94d6-d845eb11c09a" class="afm-host"></div>
+<script type="application/json" id="afm-e98fe87d-5d3c-4104-94d6-d845eb11c09a-traits">{"_heartbeat":0,"_kind":"valve","_session":"","auto":true,"commands":["open","close"],"disabled":false,"label":"Feed valve","mode":"control","orientation":"horizontal","position":null,"simulate":false,"size":[90,90],"skin":{},"style":"modern","tag":"XV-101","theme":"auto","tooltip":"","value":"closed","visible":true}</script>
+<script type="module">
+const afmLoad = (spec) => {
+  const cache = (window.__afmModules ||= {});
+  if (cache[spec.name]) return cache[spec.name];
+  const text = (sel, i) => {
+    const el = document.querySelectorAll(sel)[i || 0];
+    const bin = atob(el.textContent);
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  };
+  let inline = 0;
+  spec.css.forEach((url) => {
+    const key = spec.name + ":" + (url || inline);
+    if (!document.querySelector(`[data-afm-style="${CSS.escape(key)}"]`)) {
+      const style = document.createElement(url ? "link" : "style");
+      style.setAttribute("data-afm-style", key);
+      if (url) { style.rel = "stylesheet"; style.href = url; }
+      else style.textContent = text(`script[data-afm-css="${CSS.escape(spec.name)}"]`, inline);
+      document.head.appendChild(style);
+    }
+    if (!url) inline += 1;
+  });
+  const url = spec.esm || URL.createObjectURL(new Blob(
+    [text(`script[data-afm-esm="${CSS.escape(spec.name)}"]`)], { type: "text/javascript" }));
+  cache[spec.name] = import(url).then((m) => m.default);
+  return cache[spec.name];
+};
+const afmModel = (traits) => {
+  const handlers = {};
+  const fire = (ev, ...a) => (handlers[ev] || []).slice().forEach((h) => h(...a));
+  return {
+    get: (k) => traits[k],
+    set(k, v) {
+      if (JSON.stringify(traits[k]) === JSON.stringify(v)) return;
+      traits[k] = v;
+      fire(`change:${k}`);
+    },
+    save_changes: () => {},
+    on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+    off: (ev, cb) => (handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb)),
+    send: () => {},
+  };
+};
+const el = document.getElementById("afm-e98fe87d-5d3c-4104-94d6-d845eb11c09a");
+const traits = JSON.parse(document.getElementById("afm-e98fe87d-5d3c-4104-94d6-d845eb11c09a-traits").textContent);
+const afm = await afmLoad({"css":["../assets/awi/index.css"],"esm":"../assets/awi/index.js","name":"anywidget-instruments"});
+const model = afmModel(traits);
+await afm.initialize?.({ model });
+await afm.render({ model, el });
+</script>
+<pre><code class="language-julia hljs">PIDFaceplate(; tag = &quot;TIC-101&quot;, unit = &quot;°C&quot;, pv = 68.0, pv_max = 100, sp = 70.0, op = 42.0, hi = 85,
+             label = &quot;Jacket temperature&quot;)</code></pre><div id="afm-c1918009-b340-4863-83f5-005b98eee749" class="afm-host"></div>
+<script type="application/json" id="afm-c1918009-b340-4863-83f5-005b98eee749-traits">{"_heartbeat":0,"_kind":"pidfaceplate","_session":"","alarm_level":"normal","confirm_delta":null,"deadband":0,"disabled":false,"format":"%.1f","hi":85,"hihi":null,"label":"Jacket temperature","lo":null,"lolo":null,"loop_mode":"AUTO","mode":"control","modes":["MAN","AUTO"],"op":42.0,"op_max":100,"op_min":0,"op_unit":"%","pv":68.0,"pv_max":100,"pv_min":0,"size":[240,236],"skin":{},"sp":70.0,"sp_max":null,"sp_min":null,"sp_tracking":false,"style":"modern","tag":"TIC-101","theme":"auto","tooltip":"","unit":"°C","value":{},"visible":true}</script>
+<script type="module">
+const afmLoad = (spec) => {
+  const cache = (window.__afmModules ||= {});
+  if (cache[spec.name]) return cache[spec.name];
+  const text = (sel, i) => {
+    const el = document.querySelectorAll(sel)[i || 0];
+    const bin = atob(el.textContent);
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  };
+  let inline = 0;
+  spec.css.forEach((url) => {
+    const key = spec.name + ":" + (url || inline);
+    if (!document.querySelector(`[data-afm-style="${CSS.escape(key)}"]`)) {
+      const style = document.createElement(url ? "link" : "style");
+      style.setAttribute("data-afm-style", key);
+      if (url) { style.rel = "stylesheet"; style.href = url; }
+      else style.textContent = text(`script[data-afm-css="${CSS.escape(spec.name)}"]`, inline);
+      document.head.appendChild(style);
+    }
+    if (!url) inline += 1;
+  });
+  const url = spec.esm || URL.createObjectURL(new Blob(
+    [text(`script[data-afm-esm="${CSS.escape(spec.name)}"]`)], { type: "text/javascript" }));
+  cache[spec.name] = import(url).then((m) => m.default);
+  return cache[spec.name];
+};
+const afmModel = (traits) => {
+  const handlers = {};
+  const fire = (ev, ...a) => (handlers[ev] || []).slice().forEach((h) => h(...a));
+  return {
+    get: (k) => traits[k],
+    set(k, v) {
+      if (JSON.stringify(traits[k]) === JSON.stringify(v)) return;
+      traits[k] = v;
+      fire(`change:${k}`);
+    },
+    save_changes: () => {},
+    on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+    off: (ev, cb) => (handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb)),
+    send: () => {},
+  };
+};
+const el = document.getElementById("afm-c1918009-b340-4863-83f5-005b98eee749");
+const traits = JSON.parse(document.getElementById("afm-c1918009-b340-4863-83f5-005b98eee749-traits").textContent);
+const afm = await afmLoad({"css":["../assets/awi/index.css"],"esm":"../assets/awi/index.js","name":"anywidget-instruments"});
+const model = afmModel(traits);
+await afm.initialize?.({ model });
+await afm.render({ model, el });
+</script>
+<h2 id="Every-class"><a class="docs-heading-anchor" href="#Every-class">Every class</a><a id="Every-class-1"></a><a class="docs-heading-anchor-permalink" href="#Every-class" title="Permalink"></a></h2><pre><code class="language-julia hljs">using Markdown
+rows = [&quot;| Class | Kind | Messages from the host |&quot;, &quot;|---|---|---|&quot;]
+for class in widget_classes()
+    msgs = [m[&quot;type&quot;] for m in message_specs(class) if m[&quot;direction&quot;] == &quot;host-to-front&quot; &amp;&amp; m[&quot;type&quot;] != &quot;hb&quot;]
+    push!(rows, &quot;| `$class` | `$(traits(instrument(class))[&quot;_kind&quot;])` | $(join(msgs, &quot;, &quot;)) |&quot;)
+end
+Markdown.parse(join(rows, &quot;\n&quot;))</code></pre><div class="markdown"><table><tr><th align="right">Class</th><th align="right">Kind</th><th align="right">Messages from the host</th></tr><tr><td align="right"><code>AlarmBanner</code></td><td align="right"><code>alarmbanner</code></td><td align="right"></td></tr><tr><td align="right"><code>AlarmIndicator</code></td><td align="right"><code>alarmindicator</code></td><td align="right"></td></tr><tr><td align="right"><code>AlarmList</code></td><td align="right"><code>alarmlist</code></td><td align="right"></td></tr><tr><td align="right"><code>AnalogIndicator</code></td><td align="right"><code>analogindicator</code></td><td align="right"></td></tr><tr><td align="right"><code>Annunciator</code></td><td align="right"><code>annunciator</code></td><td align="right"></td></tr><tr><td align="right"><code>BarGraph</code></td><td align="right"><code>bargraph</code></td><td align="right"></td></tr><tr><td align="right"><code>BitField</code></td><td align="right"><code>bitfield</code></td><td align="right"></td></tr><tr><td align="right"><code>Compass</code></td><td align="right"><code>compass</code></td><td align="right"></td></tr><tr><td align="right"><code>DeviationIndicator</code></td><td align="right"><code>deviation</code></td><td align="right"></td></tr><tr><td align="right"><code>Dial</code></td><td align="right"><code>dial</code></td><td align="right"></td></tr><tr><td align="right"><code>DigitalWaveformGraph</code></td><td align="right"><code>digitalgraph</code></td><td align="right">data</td></tr><tr><td align="right"><code>EmergencyStop</code></td><td align="right"><code>emergencystop</code></td><td align="right">latch_expired</td></tr><tr><td align="right"><code>EquipmentTree</code></td><td align="right"><code>equipmenttree</code></td><td align="right"></td></tr><tr><td align="right"><code>EventLog</code></td><td align="right"><code>eventlog</code></td><td align="right"></td></tr><tr><td align="right"><code>FillSlide</code></td><td align="right"><code>fillslide</code></td><td align="right"></td></tr><tr><td align="right"><code>Gauge</code></td><td align="right"><code>gauge</code></td><td align="right"></td></tr><tr><td align="right"><code>IntensityChart</code></td><td align="right"><code>intensitychart</code></td><td align="right">append, snapshot, clear</td></tr><tr><td align="right"><code>KPITile</code></td><td align="right"><code>kpitile</code></td><td align="right">snapshot, append</td></tr><tr><td align="right"><code>Knob</code></td><td align="right"><code>knob</code></td><td align="right"></td></tr><tr><td align="right"><code>LED</code></td><td align="right"><code>led</code></td><td align="right">latch_expired</td></tr><tr><td align="right"><code>Meter</code></td><td align="right"><code>meter</code></td><td align="right"></td></tr><tr><td align="right"><code>MixedSignalGraph</code></td><td align="right"><code>mixedgraph</code></td><td align="right">data</td></tr><tr><td align="right"><code>Motor</code></td><td align="right"><code>motor</code></td><td align="right"></td></tr><tr><td align="right"><code>NumericEntry</code></td><td align="right"><code>numericentry</code></td><td align="right"></td></tr><tr><td align="right"><code>PIDFaceplate</code></td><td align="right"><code>pidfaceplate</code></td><td align="right">rejected</td></tr><tr><td align="right"><code>PictureControl</code></td><td align="right"><code>picture</code></td><td align="right">draw</td></tr><tr><td align="right"><code>Pipe</code></td><td align="right"><code>pipe</code></td><td align="right"></td></tr><tr><td align="right"><code>PolarPlot</code></td><td align="right"><code>polar</code></td><td align="right"></td></tr><tr><td align="right"><code>Pump</code></td><td align="right"><code>pump</code></td><td align="right"></td></tr><tr><td align="right"><code>PushButton</code></td><td align="right"><code>pushbutton</code></td><td align="right">latch_expired</td></tr><tr><td align="right"><code>RadarChart</code></td><td align="right"><code>radar</code></td><td align="right"></td></tr><tr><td align="right"><code>RecipeTable</code></td><td align="right"><code>recipetable</code></td><td align="right">rejected</td></tr><tr><td align="right"><code>RockerSwitch</code></td><td align="right"><code>rockerswitch</code></td><td align="right">latch_expired</td></tr><tr><td align="right"><code>SelectorSwitch</code></td><td align="right"><code>selectorswitch</code></td><td align="right"></td></tr><tr><td align="right"><code>SevenSegment</code></td><td align="right"><code>sevensegment</code></td><td align="right"></td></tr><tr><td align="right"><code>SlideSwitch</code></td><td align="right"><code>slideswitch</code></td><td align="right">latch_expired</td></tr><tr><td align="right"><code>SmithChart</code></td><td align="right"><code>smith</code></td><td align="right"></td></tr><tr><td align="right"><code>Sparkline</code></td><td align="right"><code>sparkline</code></td><td align="right">snapshot, append</td></tr><tr><td align="right"><code>StackLight</code></td><td align="right"><code>stacklight</code></td><td align="right"></td></tr><tr><td align="right"><code>StateMachine</code></td><td align="right"><code>statemachine</code></td><td align="right">rejected</td></tr><tr><td align="right"><code>SvgPanel</code></td><td align="right"><code>svgpanel</code></td><td align="right"></td></tr><tr><td align="right"><code>SynopticCanvas</code></td><td align="right"><code>synoptic</code></td><td align="right"></td></tr><tr><td align="right"><code>Tank</code></td><td align="right"><code>tank</code></td><td align="right"></td></tr><tr><td align="right"><code>ThemeSwitch</code></td><td align="right"><code>themeswitch</code></td><td align="right"></td></tr><tr><td align="right"><code>Thermometer</code></td><td align="right"><code>thermometer</code></td><td align="right"></td></tr><tr><td align="right"><code>ToggleSwitch</code></td><td align="right"><code>toggleswitch</code></td><td align="right">latch_expired</td></tr><tr><td align="right"><code>Transmitter</code></td><td align="right"><code>transmitter</code></td><td align="right"></td></tr><tr><td align="right"><code>TrendChart</code></td><td align="right"><code>trendchart</code></td><td align="right">append, snapshot, clear</td></tr><tr><td align="right"><code>VUMeter</code></td><td align="right"><code>vumeter</code></td><td align="right"></td></tr><tr><td align="right"><code>Valve</code></td><td align="right"><code>valve</code></td><td align="right"></td></tr><tr><td align="right"><code>WaveformChart</code></td><td align="right"><code>waveformchart</code></td><td align="right">append, snapshot, clear</td></tr><tr><td align="right"><code>XYGraph</code></td><td align="right"><code>xygraph</code></td><td align="right">data</td></tr></table>
+</div></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../getting-started/">« Getting started</a><a class="docs-footer-nextpage" href="../kaimonslate/">Kaimon Slate »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Friday 25 September 2026 13:16">Friday 25 September 2026</span>. Using Julia version 1.13.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
