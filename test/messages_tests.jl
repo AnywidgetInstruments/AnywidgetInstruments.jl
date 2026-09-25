@@ -44,7 +44,7 @@ end
 
 @testitem "transport (JL-MSG-006)" begin
     w = Tank(; id="lvl")
-    AnywidgetInstruments.set_transport!(nothing)
+    set_transport!(nothing)
     e = try
         send_message(w, heartbeat_message("s", 1))
         nothing
@@ -54,9 +54,9 @@ end
     @test e isa ErrorException
     @test occursin("transport", sprint(showerror, e))
     sent = []
-    AnywidgetInstruments.set_transport!((id, msg) -> push!(sent, (id, msg)))
+    set_transport!((id, msg) -> push!(sent, (id, msg)))
     send_message(w, heartbeat_message("s", 1))
     @test sent[1][1] == "lvl"
     @test sent[1][2].content["type"] == "hb"
-    AnywidgetInstruments.set_transport!(nothing)
+    set_transport!(nothing)
 end

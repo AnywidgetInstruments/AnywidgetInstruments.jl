@@ -11,7 +11,7 @@ using AnywidgetInstruments
 
 ## Building messages
 
-A [`Message`](@ref) is a JSON `content` and a list of binary buffers.
+A `Message` (from Anywidget.jl) is a JSON `content` and a list of binary buffers.
 Builders check the message type against the contract:
 
 ```@example msg
@@ -31,17 +31,17 @@ length.(m.buffers)   # float64 times and float32 values for each pen
 | [`append_message`](@ref)`(w, times, values)`, [`snapshot_message`](@ref) | `TrendChart` |
 | [`message`](@ref)`(w, type; fields...)` | any message without buffers (`clear`, `latch_expired`, …) |
 
-[`encode_buffer`](@ref) writes the buffers of other messages: numpy-style
+`encode_buffer` (from Anywidget.jl) writes the buffers of other messages: numpy-style
 `dtype`, little-endian whatever the host.
 
 ## Sending messages
 
-[`send_message`](@ref) hands a message to the transport of the host, with the
+`send_message` (from Anywidget.jl) hands a message to the transport of the host, with the
 widget's message id (`w.id`). The Kaimon Slate extension installs one when
 SlateAFM is loaded; another host installs its own:
 
 ```julia
-AnywidgetInstruments.set_transport!((id, msg) -> my_send(id, msg.content, msg.buffers))
+set_transport!((id, msg) -> my_send(id, msg.content, msg.buffers))
 ```
 
 ## Heartbeats

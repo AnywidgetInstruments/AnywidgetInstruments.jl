@@ -8,10 +8,11 @@ Instrumentation widgets for Julia: knobs, gauges, tanks, thermometers, LEDs,
 switches, stack lights, strip charts, alarm lists, PID faceplates, state
 machines… The widgets are the front end of the Python package
 [anywidget-instruments](https://github.com/s-celles/anywidget-instruments),
-shipped with this package together with their trait contract. No Python and no
+shipped with this package together with their trait contract, and hosted by
+[Anywidget.jl](https://github.com/s-celles/Anywidget.jl). No Python and no
 Node.js are needed.
 
-> **Status: pre-alpha (0.0.1, phase 0).** See the
+> **Status: pre-alpha (0.0.2, phase 1).** See the
 > [specification](docs/src/specification.md) and the
 > [roadmap](docs/src/roadmap.md).
 
@@ -21,6 +22,7 @@ Node.js are needed.
 
 ```julia
 using Pkg
+Pkg.add(url = "https://github.com/s-celles/Anywidget.jl")   # until both are registered
 Pkg.add(url = "https://github.com/s-celles/AnywidgetInstruments.jl")
 ```
 
@@ -44,7 +46,7 @@ html_page("station.html", gain, level, LED(true; label = "Run"))
 - **Standalone HTML**: widgets display in Documenter, VS Code, Jupyter
   (IJulia), Pluto or any HTML page.
 - **[Kaimon Slate](https://github.com/kahliburke/KaimonSlate.jl)**: `@bind level Tank(...)`
-  through the SlateAFM extension, with messages and binary buffers from Julia
+  through Anywidget.jl and SlateAFM, with messages and binary buffers from Julia
   (`examples/kaimonslate/tank_station.jl`).
 - **Shared rules** (alarm levels with deadband, value coercion, value labels)
   pass the parity cases of the Python and TypeScript implementations.

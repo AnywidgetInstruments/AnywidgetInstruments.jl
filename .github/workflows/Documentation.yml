@@ -17,6 +17,9 @@ permissions:
   pull-requests: read
   statuses: write
 
+env:
+  JULIA_PKG_USE_CLI_GIT: "true"
+
 jobs:
   docs:
     name: Build and deploy the documentation
@@ -27,6 +30,14 @@ jobs:
         with:
           version: "1"
       - uses: julia-actions/cache@v3
+      - name: Access Anywidget.jl (unregistered; private until published)
+        shell: bash
+        env:
+          TOKEN: ${{ secrets.ANYWIDGET_TOKEN }}
+        run: |
+          if [ -n "$TOKEN" ]; then
+            git config --global url."https://x-access-token:${TOKEN}@github.com/s-celles/Anywidget.jl".insteadOf "https://github.com/s-celles/Anywidget.jl"
+          fi
       - name: Instantiate
         run: julia --color=yes --project=docs -e 'using Pkg; Pkg.instantiate()'
       - name: Build and deploy

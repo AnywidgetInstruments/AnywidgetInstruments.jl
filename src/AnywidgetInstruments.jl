@@ -6,12 +6,11 @@ supervisory objects) for Julia, from the front end of the Python package
 [anywidget-instruments](https://github.com/s-celles/anywidget-instruments).
 
 The package ships the front-end module and its trait contract: a widget is a
-class name and a dictionary of traits checked against that contract. Hosts
-render it:
+class name and a dictionary of traits checked against that contract. Widgets
+are hosted by [Anywidget.jl](https://github.com/s-celles/Anywidget.jl):
 
 - any environment showing HTML, through the standalone `text/html` display;
-- KaimonSlate.jl, through the SlateAFM extension (package extension on
-  SlateExtensionsBase).
+- Kaimon Slate, through SlateAFM.
 
 ```julia
 using AnywidgetInstruments
@@ -21,17 +20,18 @@ level[:value] = 2.0
 """
 module AnywidgetInstruments
 
+using Anywidget: Anywidget, AbstractAnywidget, AFMModule
+using Anywidget: Message, encode_buffer, html_page, send_message, set_asset_base!, set_transport!
 using Base64: base64encode
 using JSON: JSON
 using TOML: TOML
-using UUIDs: uuid4
 
-export frontend_version, widget_classes, trait_specs, message_specs, default_traits
+export frontend_module, frontend_version, widget_classes, trait_specs, message_specs, default_traits
 export Instrument, instrument, widget_class, traits, update, merge_traits, class_of_kind, to_json
 export encode_buffer, Message, message, heartbeat_message, append_message, snapshot_message
-export send_message
+export send_message, set_transport!
 export alarm_level, coerce_value, valid_scale, normalize_value_labels, value_label_of, value_of_label
-export html_page
+export html_page, set_asset_base!
 
 include("assets.jl")
 include("encoding.jl")
@@ -39,6 +39,5 @@ include("logic.jl")
 include("instrument.jl")
 include("widgets.jl")
 include("messages.jl")
-include("html.jl")
 
 end # module

@@ -16,10 +16,11 @@ they are not releases.
 - Standalone HTML display and pages.
 - Kaimon Slate extension through SlateAFM, with a headless-validated example.
 
-## Phase 1 — `0.0.2`: more hosts
+## Phase 1 — `0.0.2`: hosting by Anywidget.jl (done)
 
-- Bidirectional host for Bonito.jl (operator actions back to Julia).
-- Pluto.jl integration (`@bind` through AbstractPlutoDingetjes).
+- Widgets are `Anywidget.AbstractAnywidget`s: the HTML display, pages,
+  messages and the Kaimon Slate integration come from Anywidget.jl.
+- More hosts (Bonito.jl, Pluto.jl, IJulia) arrive through Anywidget.jl.
 - Heartbeat helper (a task sending `hb` every `_heartbeat` seconds).
 
 ## Phase 2 — `0.0.3`: more shared rules

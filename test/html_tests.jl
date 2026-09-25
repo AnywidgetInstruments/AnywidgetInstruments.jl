@@ -1,40 +1,35 @@
-@testitem "standalone HTML (JL-HTML-001..003)" begin
-    AnywidgetInstruments.set_asset_base!(nothing)
-    t = Tank(3.2; max=4, label="</script><b>x</b>")
-    @test showable(MIME"text/html"(), t)
-    h = sprint(show, MIME"text/html"(), t)
-    @test occursin("<script type=\"module\">", h)
-    @test occursin("application/json", h)
-    # the traits cannot close their script element
-    json_part = match(r"<script type=\"application/json\"[^>]*>(.*?)</script>"s, h).captures[1]
-    @test !occursin("</", json_part)
-    @test occursin("\\u003c/script", json_part)
-    # self-contained: the module and the styles travel inline (base64)
-    @test occursin("data-awi-esm", h)
-    @test occursin(".awi-root", String(read(joinpath(AnywidgetInstruments.assets_dir(), "index.css"))))
-    @test length(h) > 500_000
+@testitem "Anywidget.jl interface (JL-HOST-001)" begin
+    using Anywidget
+    t = Tank(3.2; max=4, id="lvl")
+    @test t isa AbstractAnywidget
+    @test afm_module(t) === frontend_module()
+    @test frontend_module().name == "anywidget-instruments"
+    @test widget_traits(t) == traits(t; defaults=true)
+    @test message_id(t) == "lvl"
 end
 
-@testitem "asset base URL (JL-HTML-004)" begin
-    AnywidgetInstruments.set_asset_base!("https://example.org/awi/")
+@testitem "standalone HTML (JL-HTML-001, JL-HTML-002)" begin
+    set_asset_base!(frontend_module(), nothing)
+    t = Tank(3.2; max=4, label="</script><b>x</b>")
+    h = sprint(show, MIME"text/html"(), t)
+    @test occursin("data-afm-esm=\"anywidget-instruments\"", h)     # inlined by Anywidget.jl
+    json_part = match(r"<script type=\"application/json\"[^>]*>(.*?)</script>"s, h).captures[1]
+    @test !occursin("</", json_part)
+    @test occursin("\"_kind\":\"tank\"", json_part)
+    @test occursin("\"ticks\":5", json_part)                            # defaults filled in
+end
+
+@testitem "asset base URL and pages (JL-HTML-003)" begin
+    set_asset_base!(frontend_module(), "https://example.org/awi/")
     try
         h = sprint(show, MIME"text/html"(), Knob(1.0))
         @test occursin("https://example.org/awi/index.js", h)
         @test occursin("https://example.org/awi/index.css", h)
         @test length(h) < 20_000
     finally
-        AnywidgetInstruments.set_asset_base!(nothing)
+        set_asset_base!(frontend_module(), nothing)
     end
-end
-
-@testitem "html page (JL-HTML-005)" begin
-    AnywidgetInstruments.set_asset_base!(nothing)
     p = html_page(Tank(1.0), Knob(2.0); title="Station")
-    @test startswith(p, "<!doctype html>")
-    @test occursin("<title>Station</title>", p)
-    @test count("data-awi-esm=\"", p) == 1    # the module once
-    @test count("application/json", p) == 2   # one trait block per widget
-    path = tempname() * ".html"
-    html_page(path, Tank(1.0))
-    @test isfile(path)
+    @test count("data-afm-esm=\"anywidget-instruments\"", p) == 1
+    @test count("application/json", p) == 2
 end
