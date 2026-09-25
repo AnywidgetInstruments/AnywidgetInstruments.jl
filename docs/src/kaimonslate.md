@@ -12,7 +12,7 @@ AnywidgetInstruments.jl with it:
   `/ext-assets/Anywidget.anywidget-instruments/`;
 - `send_message` goes through `SlateAFM.afm_emit`.
 
-The extension needs Julia 1.12 or later (a requirement of SlateExtensionsBase).
+The integration needs Julia 1.12 or later, a requirement of SlateExtensionsBase (tested on 1.13).
 
 ## Setup
 
