@@ -16,6 +16,7 @@ parentheses where they apply.
 |---|---|---|
 | 0.1 | 2026-09-25 | First version (phase 0, package 0.0.1) |
 | 0.2 | 2026-09-25 | Hosting moved to Anywidget.jl: sections 7 and 8 replaced by the host requirements (package 0.0.2) |
+| 0.3 | 2026-09-25 | Weekly refresh of the front end (JL-GEN-007); "Out of scope" becomes "Planned" |
 
 ## 1. General
 
@@ -27,6 +28,7 @@ parentheses where they apply.
 | JL-GEN-004 | M | The package shall record the version and the SHA-256 checksum of the wheel its front end was taken from (`assets/SOURCE.toml`). |
 | JL-GEN-005 | M | The package shall depend only on Anywidget.jl, JSON.jl and standard libraries. |
 | JL-GEN-006 | S | The package shall keep the license notice of anywidget-instruments next to the vendored files. |
+| JL-GEN-007 | S | The repository shall refresh the vendored front end and the parity cases of anywidget-instruments weekly, as a pull request when they change. |
 
 ## 2. Contract
 
@@ -111,8 +113,10 @@ which specifies the standalone HTML display and the Kaimon Slate integration
 | JL-QA-003 | M | The documentation shall build without warnings and publish `llms.txt` and `llms-full.txt`. |
 | JL-QA-004 | S | The package shall be formatted with JuliaFormatter (`.JuliaFormatter.toml`). |
 
-## Out of scope for now
+## Planned
 
-- Bidirectional hosts (Bonito.jl, Pluto.jl): provided by Anywidget.jl in a later phase.
+Not yet specified as requirements; see the [roadmap](roadmap.md) for the phases.
+
+- Bidirectional hosts (Bonito.jl, Pluto.jl, IJulia), provided by Anywidget.jl.
 - Julia ports of the other shared rules (annunciator sequences, state machine
-  transitions, PID faceplate, …): later phases, one parity file at a time.
+  transitions, PID faceplate, …), one parity file at a time.

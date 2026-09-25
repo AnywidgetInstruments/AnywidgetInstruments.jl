@@ -27,6 +27,12 @@ SHA256="$(sha256sum "$TMP/wheel.whl" | cut -d' ' -f1)"
 (cd "$TMP" && unzip -q wheel.whl 'anywidget_instruments/static/*' 'anywidget_instruments/schema/*' \
     'anywidget_instruments/templates/*' '*.dist-info/licenses/LICENSE')
 
+# Same wheel as already vendored: keep assets/ as is (no new date, no diff).
+if [[ -f "$DEST/SOURCE.toml" ]] && grep -q "sha256 = \"$SHA256\"" "$DEST/SOURCE.toml"; then
+    echo "assets/ already vendored from this wheel ($SHA256)"
+    exit 0
+fi
+
 rm -rf "$DEST"
 mkdir -p "$DEST"
 PKG="$TMP/anywidget_instruments"

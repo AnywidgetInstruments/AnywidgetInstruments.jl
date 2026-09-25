@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Weekly workflow refreshing the vendored front end and the parity cases of
+  anywidget-instruments, as a pull request (`SyncFrontend.yml`).
+
+### Changed
+
+- Front end refreshed from anywidget-instruments at `293aeea` (SHA-256
+  `240f52fc…` in `assets/SOURCE.toml`).
+- Documentation: supported Julia versions stated as "1.10 and later, tested on
+  1.13"; the Kaimon Slate integration needs 1.12 or later.
+
+### Fixed
+
+- `docs/Project.toml`: compat bound of Markdown (`"1"`).
+
 ## [0.0.2] - 2026-09-25
 
 Phase 1 of the roadmap: hosting moved to Anywidget.jl.

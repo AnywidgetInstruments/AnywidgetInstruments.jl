@@ -8,7 +8,7 @@ Pkg.add(url = "https://github.com/s-celles/Anywidget.jl")   # until both are reg
 Pkg.add(url = "https://github.com/s-celles/AnywidgetInstruments.jl")
 ```
 
-The package runs on Julia 1.10 (LTS) and later. It needs neither Python nor
+The package runs on Julia 1.10 (LTS) and later, and is tested on 1.13. It needs neither Python nor
 Node.js: the front end of anywidget-instruments is shipped with it
 (`AnywidgetInstruments.assets_dir()`), and `assets/SOURCE.toml` records the
 version and the checksum of the wheel it comes from.

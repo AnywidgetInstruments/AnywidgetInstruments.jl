@@ -17830,6 +17830,7 @@ function applyPageTheme(doc, theme) {
 
 // js/src/core/view.ts
 var COMMON_TRAITS = ["mode", "label", "disabled", "visible", "tooltip", "size", "style", "theme", "skin", "_heartbeat"];
+var OFFSCREEN_MS = 100;
 var STALE_TEXT = {
   live: "",
   stale: "⚠ STALE — kernel lost",
@@ -17853,6 +17854,7 @@ var BaseView = class {
     this.kind = String(model.get("_kind") ?? "");
     this.contract = BY_KIND[this.kind];
     this._frame = 0;
+    this._offscreen = 0;
     this._dirty = true;
     this._inViewport = true;
     this._disposers = [];
@@ -17926,7 +17928,12 @@ var BaseView = class {
   schedule() {
     this._dirty = true;
     if (!this._inViewport) {
-      this.renderCommon();
+      if (!this._offscreen) {
+        this._offscreen = setTimeout(() => {
+          this._offscreen = 0;
+          if (this._dirty) this.renderCommon();
+        }, OFFSCREEN_MS);
+      }
       return;
     }
     if (this._frame) return;
@@ -17998,6 +18005,7 @@ var BaseView = class {
   }
   destroy() {
     if (this._frame && typeof cancelAnimationFrame !== "undefined") cancelAnimationFrame(this._frame);
+    if (this._offscreen) clearTimeout(this._offscreen);
     if (this._pendingSend) clearTimeout(this._pendingSend);
     for (const d of this._disposers) d();
     this.root.remove();
@@ -23340,22 +23348,30 @@ function cuts(p, q, r, t) {
   const y = hp[1];
   return x > Math.min(hp[0], hq[0]) && x < Math.max(hp[0], hq[0]) && y > Math.min(vr[1], vt[1]) && y < Math.max(vr[1], vt[1]);
 }
-function pathCost(points, a, b, ctx) {
-  let cost = 0;
+function baseCost(points) {
+  let cost = 25 * (points.length - 2);
   for (let i = 0; i + 1 < points.length; i++) {
     const [p, q] = [points[i], points[i + 1]];
+    cost += Math.abs(q[0] - p[0]) + Math.abs(q[1] - p[1]);
     if (p[0] !== q[0] && p[1] !== q[1]) cost += 5e3;
+  }
+  return cost;
+}
+function pathCost(points, a, b, ctx, limit = Infinity) {
+  let cost = baseCost(points);
+  const last = points.length - 2;
+  for (let i = 0; i <= last && cost < limit; i++) {
+    const [p, q] = [points[i], points[i + 1]];
     for (const box of ctx.boxes) {
-      if (box === a && i === 0 || box === b && i === points.length - 2) continue;
+      if (box === a && i === 0 || box === b && i === last) continue;
       if (crosses(p, q, box)) cost += 1e3;
     }
     for (const [r, t] of ctx.used) {
       cost += 8 * overlap(p, q, r, t);
       if (cuts(p, q, r, t)) cost += 12;
     }
-    cost += Math.abs(q[0] - p[0]) + Math.abs(q[1] - p[1]);
   }
-  return cost + 25 * (points.length - 2);
+  return cost;
 }
 var side = (b, horizontal, towards, offset) => horizontal ? [towards < b.cx ? b.cx - b.w / 2 : b.cx + b.w / 2, b.cy + offset] : [b.cx + offset, towards < b.cy ? b.cy - b.h / 2 : b.cy + b.h / 2];
 function routePoints(a, b, waypoints, ctx = []) {
@@ -23422,12 +23438,13 @@ function routePoints(a, b, waypoints, ctx = []) {
       }
     }
   }
-  let best = candidates[0];
+  const ranked = candidates.map((pts) => pts.filter((p, i) => i === 0 || p[0] !== pts[i - 1][0] || p[1] !== pts[i - 1][1])).map((pts) => ({ pts, base: baseCost(pts) })).sort((p, q) => p.base - q.base);
+  let best = ranked[0].pts;
   let bestCost = Infinity;
-  for (const pts of candidates) {
-    const clean = pts.filter((p, i) => i === 0 || p[0] !== pts[i - 1][0] || p[1] !== pts[i - 1][1]);
-    const cost = pathCost(clean, a, b, c);
-    if (cost < bestCost) [best, bestCost] = [clean, cost];
+  for (const { pts, base } of ranked) {
+    if (base >= bestCost) break;
+    const cost = pathCost(pts, a, b, c, bestCost);
+    if (cost < bestCost) [best, bestCost] = [pts, cost];
   }
   return best;
 }
@@ -23609,6 +23626,90 @@ var StateMachineView = class extends BaseView {
     }
     this.bar.hidden = !control;
   }
+  /**
+   * Geometry of the diagram: boxes, zones, routed arrows and label spots. It
+   * depends only on the model and the size, not on the current state, so a
+   * state change redraws from this cache without routing again.
+   */
+  layout(m, w, dh) {
+    const key = `${w}x${dh}:${JSON.stringify(m)}`;
+    if (this._layout?.key === key) return this._layout;
+    const cols = Math.max(1, ...m.states.map((st) => st.x + 1));
+    const rows = Math.max(1, ...m.states.map((st) => st.y + 1));
+    const cw = w / cols;
+    const ch = dh / rows;
+    const titled = m.states.some((st) => st.title);
+    const bw = Math.max(20, Math.min(cw - 40, titled ? 130 : 112));
+    const bh = Math.max(14, Math.min(ch - 24, titled ? 44 : 30));
+    const px = (p) => [p[0] * cw, p[1] * ch];
+    const boxes = {};
+    for (const st of m.states) boxes[st.name] = { cx: cw * (st.x + 0.5), cy: ch * (st.y + 0.5), w: bw, h: bh };
+    const all = Object.values(boxes);
+    const used = [];
+    const taken = [];
+    const out = { key, bw, bh, boxes, cells: [], areas: [], edges: [], zoneLabels: [], zoneCmds: /* @__PURE__ */ new Set() };
+    const zoneLabel = (text, x, y) => {
+      out.zoneLabels.push({ text, x, y });
+      taken.push([x - 2, y - 1, x + text.length * 5.8 + 2, y + 11]);
+    };
+    const edge = (points, text, e) => {
+      for (let i = 0; i + 1 < points.length; i++) used.push([points[i], points[i + 1]]);
+      const d = points.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join("");
+      out.edges.push({ d, text, spot: placeLabel(points, text.length * 5.2 + 4, all, taken), ...e });
+    };
+    const groups = [...new Set(m.states.map((st) => st.group).filter((g) => !!g))];
+    for (const st of m.states) {
+      if (st.group) out.cells.push({ x: cw * st.x, y: ch * st.y, w: cw, h: ch, cls: `awi-sm-zone awi-sm-zone-${groups.indexOf(st.group) % 3}` });
+    }
+    for (const g of groups) {
+      const first = m.states.filter((st) => st.group === g).sort((a, b) => a.y - b.y || a.x - b.x)[0];
+      zoneLabel(g, cw * first.x + 3, ch * first.y + 2);
+    }
+    (m.zones || []).forEach((z, i) => {
+      const inset = 3 + 5 * i;
+      const inside = m.states.filter((st) => inZone(z.rects, st.x + 0.5, st.y + 0.5)).map((st) => st.name);
+      const d = insetOutline(z.rects, cw, ch, inset).map(([x0, y0, x1, y1]) => `M${x0.toFixed(1)} ${y0.toFixed(1)}L${x1.toFixed(1)} ${y1.toFixed(1)}`).join("");
+      out.areas.push({ d, shade: z.shade ? z.rects.map(([x0, y0, x1, y1]) => ({ x: x0 * cw, y: y0 * ch, w: (x1 - x0) * cw, h: (y1 - y0) * ch, cls: "awi-sm-area-shade" })) : [] });
+      if (z.label) zoneLabel(z.label, z.rects[0][0] * cw + inset + 3, z.rects[0][1] * ch + inset + 2);
+      for (const c of z.commands || []) {
+        const targets = new Set(inside.map((name) => nextState(m, name, c)));
+        const [to] = targets;
+        if (!inside.length || targets.size !== 1 || !to || !boxes[to]) continue;
+        const target = m.states.find((st) => st.name === to);
+        const exit = zoneExit(z.rects, target.x + 0.5, target.y + 0.5);
+        if (!exit) continue;
+        const b = boxes[to];
+        const [ex, ey] = px(exit);
+        const vertical = Math.abs(ex - b.cx) < 0.5;
+        const start = vertical ? [ex, ey + (ey < b.cy ? -inset : inset)] : [ex + (ex < b.cx ? -inset : inset), ey];
+        const end = vertical ? [b.cx, b.cy + (ey < b.cy ? -bh / 2 : bh / 2)] : [b.cx + (ex < b.cx ? -bw / 2 : bw / 2), b.cy];
+        edge([start, end], c, { cmds: [c], inside });
+        out.zoneCmds.add(c);
+      }
+    });
+    const fromAny = new Set(globalCommands(m));
+    const pairs = /* @__PURE__ */ new Map();
+    for (const [from, cmd, to] of m.transitions || []) {
+      if (fromAny.has(cmd) || out.zoneCmds.has(cmd) || !boxes[from] || !boxes[to] || from === to) continue;
+      const k = `${from}>${to}`;
+      pairs.set(k, [...pairs.get(k) || [], cmd]);
+    }
+    const rowGaps = Array.from({ length: rows + 1 }, (_, k) => Math.min(dh - 3, Math.max(3, k * ch)));
+    const colGaps = Array.from({ length: cols + 1 }, (_, k) => Math.min(w - 3, Math.max(3, k * cw)));
+    const dist = (k) => {
+      const [f, t] = k.split(">");
+      return Math.abs(boxes[f].cx - boxes[t].cx) + Math.abs(boxes[f].cy - boxes[t].cy);
+    };
+    const order = [...pairs.keys()].sort((p, q) => Number(!m.routes?.[p]) - Number(!m.routes?.[q]) || dist(p) - dist(q));
+    for (const k of order) {
+      const cmds = pairs.get(k);
+      const [from, to] = k.split(">");
+      const route = m.routes?.[k]?.map(px) ?? null;
+      edge(routePoints(boxes[from], boxes[to], route, { boxes: all, used, rowGaps, colGaps }), cmds.join(" / "), { from, cmds });
+    }
+    this._layout = out;
+    return out;
+  }
   draw() {
     const m = this.machine;
     const current = String(this.get("value"));
@@ -23621,103 +23722,29 @@ var StateMachineView = class extends BaseView {
     s.setAttribute("viewBox", `0 0 ${w} ${dh}`);
     s.style.height = `${dh}px`;
     clear(s);
-    const cols = Math.max(1, ...m.states.map((st) => st.x + 1));
-    const rows = Math.max(1, ...m.states.map((st) => st.y + 1));
-    const cw = w / cols;
-    const ch = dh / rows;
-    const titled = m.states.some((st) => st.title);
-    const bw = Math.max(20, Math.min(cw - 40, titled ? 130 : 112));
-    const bh = Math.max(14, Math.min(ch - 24, titled ? 44 : 30));
-    const px = (p) => [p[0] * cw, p[1] * ch];
-    const boxes = {};
-    for (const st of m.states) boxes[st.name] = { cx: cw * (st.x + 0.5), cy: ch * (st.y + 0.5), w: bw, h: bh };
-    const edges = svg("g", { class: "awi-sm-edges" });
-    const labels = svg("g", { class: "awi-sm-edge-labels" });
-    const arrow = `url(#${this.id}-arrow)`;
-    const all = Object.values(boxes);
-    const used = [];
-    const taken = [];
-    const zoneLabels = svg("g", { class: "awi-sm-zone-labels" });
-    const zoneLabel = (text, x, y) => {
-      zoneLabels.appendChild(svgText(text, { class: "awi-sm-zone-label", x, y, "dominant-baseline": "hanging" }));
-      taken.push([x - 2, y - 1, x + text.length * 5.8 + 2, y + 11]);
-    };
-    const edge = (points, text, next, extra = "") => {
-      const d = points.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join("");
-      edges.appendChild(svg("path", { class: `awi-sm-edge${extra}${next ? " awi-sm-edge-next" : ""}`, d, "marker-end": arrow }));
-      for (let i = 0; i + 1 < points.length; i++) used.push([points[i], points[i + 1]]);
-      const a = placeLabel(points, text.length * 5.2 + 4, all, taken);
-      const above = (a.side ?? 1) > 0;
-      const attrs = a.horizontal ? { x: a.x, y: above ? a.y - 3 : a.y + 3, "text-anchor": "middle", "dominant-baseline": above ? "auto" : "hanging" } : { x: above ? a.x + 4 : a.x - 4, y: a.y, "text-anchor": above ? "start" : "end", "dominant-baseline": "central" };
-      labels.appendChild(svgText(text, { class: `awi-sm-edge-label${next ? " awi-sm-edge-label-next" : ""}`, ...attrs }));
-    };
-    const groups = [...new Set(m.states.map((st) => st.group).filter((g) => !!g))];
-    for (const st of m.states) {
-      if (!st.group) continue;
-      s.appendChild(svg("rect", { class: `awi-sm-zone awi-sm-zone-${groups.indexOf(st.group) % 3}`, x: cw * st.x, y: ch * st.y, width: cw, height: ch }));
-    }
-    for (const g of groups) {
-      const first = m.states.filter((st) => st.group === g).sort((a, b) => a.y - b.y || a.x - b.x)[0];
-      zoneLabel(g, cw * first.x + 3, ch * first.y + 2);
-    }
-    const zoneCmds = /* @__PURE__ */ new Set();
-    (m.zones || []).forEach((z, i) => {
-      const inset = 3 + 5 * i;
-      const inside = m.states.filter((st) => inZone(z.rects, st.x + 0.5, st.y + 0.5));
-      if (z.shade) {
-        for (const [x0, y0, x1, y1] of z.rects) s.appendChild(svg("rect", { class: "awi-sm-area-shade", x: x0 * cw, y: y0 * ch, width: (x1 - x0) * cw, height: (y1 - y0) * ch }));
-      }
-      const d = insetOutline(z.rects, cw, ch, inset).map(([x0, y0, x1, y1]) => `M${x0.toFixed(1)} ${y0.toFixed(1)}L${x1.toFixed(1)} ${y1.toFixed(1)}`).join("");
-      s.appendChild(svg("path", { class: "awi-sm-area", d }));
-      if (z.label) zoneLabel(z.label, z.rects[0][0] * cw + inset + 3, z.rects[0][1] * ch + inset + 2);
-      for (const c of z.commands || []) {
-        const targets = new Set(inside.map((st) => nextState(m, st.name, c)));
-        const [to] = targets;
-        if (!inside.length || targets.size !== 1 || !to || !boxes[to]) continue;
-        const target = m.states.find((st) => st.name === to);
-        const exit = zoneExit(z.rects, target.x + 0.5, target.y + 0.5);
-        if (!exit) continue;
-        const b = boxes[to];
-        const [ex, ey] = px(exit);
-        const vertical = Math.abs(ex - b.cx) < 0.5;
-        const start = vertical ? [ex, ey + (ey < b.cy ? -inset : inset)] : [ex + (ex < b.cx ? -inset : inset), ey];
-        const end = vertical ? [b.cx, b.cy + (ey < b.cy ? -bh / 2 : bh / 2)] : [b.cx + (ex < b.cx ? -bw / 2 : bw / 2), b.cy];
-        const here2 = inside.some((st) => st.name === current);
-        edge([start, end], c, here2 && available.has(c), " awi-sm-zone-edge");
-        zoneCmds.add(c);
-      }
-    });
-    const fromAny = new Set(globalCommands(m));
-    const pairs = /* @__PURE__ */ new Map();
-    for (const [from, cmd, to] of m.transitions || []) {
-      if (fromAny.has(cmd) || zoneCmds.has(cmd) || !boxes[from] || !boxes[to] || from === to) continue;
-      const key = `${from}>${to}`;
-      pairs.set(key, [...pairs.get(key) || [], cmd]);
-    }
-    const rowGaps = Array.from({ length: rows + 1 }, (_, k) => Math.min(dh - 3, Math.max(3, k * ch)));
-    const colGaps = Array.from({ length: cols + 1 }, (_, k) => Math.min(w - 3, Math.max(3, k * cw)));
-    const order = [...pairs.keys()].sort((p, q) => {
-      const fixed = Number(!m.routes?.[p]) - Number(!m.routes?.[q]);
-      const dist = (k) => {
-        const [f, t] = k.split(">");
-        return Math.abs(boxes[f].cx - boxes[t].cx) + Math.abs(boxes[f].cy - boxes[t].cy);
-      };
-      return fixed || dist(p) - dist(q);
-    });
-    for (const key of order) {
-      const cmds = pairs.get(key);
-      const [from, to] = key.split(">");
-      const route = m.routes?.[key]?.map(px) ?? null;
-      const points = routePoints(boxes[from], boxes[to], route, { boxes: all, used, rowGaps, colGaps });
-      const next = from === current && cmds.some((c) => c === SC2 || available.has(c));
-      edge(points, cmds.join(" / "), next);
+    const { bw, bh, boxes, cells, areas, edges, zoneLabels, zoneCmds } = this.layout(m, w, dh);
+    const rect = (r) => svg("rect", { class: r.cls, x: r.x, y: r.y, width: r.w, height: r.h });
+    for (const c of cells) s.appendChild(rect(c));
+    for (const a of areas) {
+      for (const r of a.shade) s.appendChild(rect(r));
+      s.appendChild(svg("path", { class: "awi-sm-area", d: a.d }));
     }
     s.appendChild(
       svg("defs", {}, [
         svg("marker", { id: `${this.id}-arrow`, viewBox: "0 0 8 8", refX: 7, refY: 4, markerWidth: 7, markerHeight: 7, markerUnits: "userSpaceOnUse", orient: "auto-start-reverse" }, [svg("path", { class: "awi-sm-arrowhead", d: "M0 0L8 4L0 8Z" })])
       ])
     );
-    s.append(edges);
+    const arrows = svg("g", { class: "awi-sm-edges" });
+    const labels = svg("g", { class: "awi-sm-edge-labels" });
+    for (const e of edges) {
+      const next = e.inside ? e.inside.includes(current) && e.cmds.some((c) => available.has(c)) : e.from === current && e.cmds.some((c) => c === SC2 || available.has(c));
+      arrows.appendChild(svg("path", { class: `awi-sm-edge${e.inside ? " awi-sm-zone-edge" : ""}${next ? " awi-sm-edge-next" : ""}`, d: e.d, "marker-end": `url(#${this.id}-arrow)` }));
+      const a = e.spot;
+      const above = (a.side ?? 1) > 0;
+      const attrs = a.horizontal ? { x: a.x, y: above ? a.y - 3 : a.y + 3, "text-anchor": "middle", "dominant-baseline": above ? "auto" : "hanging" } : { x: above ? a.x + 4 : a.x - 4, y: a.y, "text-anchor": above ? "start" : "end", "dominant-baseline": "central" };
+      labels.appendChild(svgText(e.text, { class: `awi-sm-edge-label${next ? " awi-sm-edge-label-next" : ""}`, ...attrs }));
+    }
+    s.append(arrows);
     for (const st of m.states) {
       const { cx, cy } = boxes[st.name];
       const cls = `awi-sm-state ${st.acting ? "awi-sm-acting" : "awi-sm-wait"}${st.name === current ? " awi-sm-current" : ""}`;
@@ -23731,7 +23758,8 @@ var StateMachineView = class extends BaseView {
         s.appendChild(svgText(line, { class: `awi-sm-title${st.name === current ? " awi-sm-title-current" : ""}`, x: cx, y: top + 10 * (i + 1), "text-anchor": "middle", "dominant-baseline": "central" }));
       });
     }
-    s.append(labels, zoneLabels);
+    s.append(labels, svg("g", { class: "awi-sm-zone-labels" }, zoneLabels.map((z) => svgText(z.text, { class: "awi-sm-zone-label", x: z.x, y: z.y, "dominant-baseline": "hanging" }))));
+    const fromAny = new Set(globalCommands(m));
     const here = m.states.find((st) => st.name === current);
     const named = here?.title ? `${current} ${here.title}` : current;
     const notes = (m.commands || []).filter((c) => fromAny.has(c) && !zoneCmds.has(c));

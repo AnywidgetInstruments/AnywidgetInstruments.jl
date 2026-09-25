@@ -1,0 +1,58 @@
+name: Sync front end
+
+# Refresh the vendored front end of anywidget-instruments (JL-GEN-007): download
+# the wheel, run scripts/sync-assets.sh, copy the parity cases, and open a pull
+# request when something changed. The wheel comes from the documentation site
+# until anywidget-instruments publishes releases.
+
+on:
+  schedule:
+    - cron: "0 5 * * 1"
+  workflow_dispatch:
+    inputs:
+      wheel:
+        description: "Wheel URL (default: the one served by the documentation site)"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # anywidget-instruments is private: its parity cases are read with
+      # ANYWIDGET_TOKEN when the token also grants Contents: read on it;
+      # otherwise only the wheel (served publicly) is vendored.
+      - uses: actions/checkout@v7
+        continue-on-error: true
+        with:
+          repository: s-celles/anywidget-instruments
+          path: .upstream
+          token: ${{ secrets.ANYWIDGET_TOKEN }}
+      - name: Vendor the wheel
+        run: scripts/sync-assets.sh ${{ inputs.wheel }}
+      - name: Copy the parity cases
+        if: hashFiles('.upstream/tests/parity/*.json') != ''
+        run: |
+          for f in test/parity/*.json; do
+            cp ".upstream/tests/parity/$(basename "$f")" "$f"
+          done
+      - name: Remove the upstream checkout
+        run: rm -rf .upstream
+      - name: Open a pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/sync-frontend-auto
+          commit-message: |
+            chore: sync the front end of anywidget-instruments
+
+            Assisted-by: AI
+          title: "chore: sync the front end of anywidget-instruments"
+          body: |
+            Automated refresh of `assets/` (see `assets/SOURCE.toml`) and `test/parity/`.
+            Review the diff of `assets/contract.json`: a changed trait or message may need
+            changes to the Julia API. Close and reopen the pull request to run the checks.
+          delete-branch: true

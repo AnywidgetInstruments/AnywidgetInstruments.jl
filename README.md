@@ -26,7 +26,7 @@ Pkg.add(url = "https://github.com/s-celles/Anywidget.jl")   # until both are reg
 Pkg.add(url = "https://github.com/s-celles/AnywidgetInstruments.jl")
 ```
 
-Julia 1.10 (LTS) and later. The Kaimon Slate integration needs Julia 1.12.
+Julia 1.10 (LTS) and later, tested on 1.13. The Kaimon Slate integration needs Julia 1.12 or later.
 
 ## Quick start
 
