@@ -20,7 +20,7 @@ level[:value] = 2.0
 """
 module AnywidgetInstruments
 
-using Anywidget: Anywidget, AbstractAnywidget, AFMModule
+using Anywidget: Anywidget, AbstractAnywidget, FrontendModule
 using Anywidget: Message, encode_buffer, html_page, send_message, set_asset_base!, set_transport!
 using Base64: base64encode
 using JSON: JSON

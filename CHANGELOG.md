@@ -26,7 +26,7 @@ Phase 1 of the roadmap: hosting moved to Anywidget.jl.
 
 ### Added
 
-- `frontend_module()`: the vendored front end as an `Anywidget.AFMModule`.
+- `frontend_module()`: the vendored front end as an `Anywidget.FrontendModule`.
 
 ## [0.0.1] - 2026-09-25
 
