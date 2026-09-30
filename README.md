@@ -63,6 +63,11 @@ just sync-assets   # refresh the vendored front end from an anywidget-instrument
 
 ## License
 
-BSD 3-Clause, see [LICENSE.md](LICENSE.md). The widgets are for monitoring,
+BSD 3-Clause, see [LICENSE](LICENSE). The front end in `assets/` comes from
+[anywidget-instruments-industrial](https://github.com/AnywidgetInstruments/anywidget-instruments-industrial),
+and `schema/instrument.schema.json` from the
+[anywidget-instruments](https://github.com/AnywidgetInstruments/anywidget-instruments) core, under the same
+license; their notices are in `assets/LICENSE-anywidget-instruments-industrial` and
+`assets/LICENSE-anywidget-instruments`. The widgets are for monitoring,
 teaching and prototyping; they are not a protection layer and never replace
 the safety functions of a process.
