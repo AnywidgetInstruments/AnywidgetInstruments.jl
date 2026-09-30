@@ -12,4 +12,4 @@ AnywidgetInstruments = {path = ".."}
 [compat]
 Documenter = "1"
 DocumenterLandingPage = "0.2"
-Markdown = "1"
+Markdown = "1, < 0.0.1"
