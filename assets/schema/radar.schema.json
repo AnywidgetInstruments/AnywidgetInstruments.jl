@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/radar.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/radar.schema.json",
   "title": "RadarChart",
   "description": "Multi-axis (spider) chart (SPEC-004).",
   "type": "object",
@@ -30,7 +30,7 @@
           "values": {
             "type": "array",
             "items": {
-              "$ref": "instrument.schema.json#/$defs/float"
+              "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float"
             },
             "description": "One value per axis."
           }

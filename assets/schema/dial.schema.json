@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/dial.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/dial.schema.json",
   "title": "Dial",
   "description": "Rotary control with a circular scale, optionally multi-turn (NUM-102).",
   "type": "object",

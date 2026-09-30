@@ -5,7 +5,7 @@ layout: home
 hero:
   name: AnywidgetInstruments.jl
   text: Instrumentation widgets for Julia
-  tagline: Knobs, gauges, tanks, LEDs, strip charts, alarms and supervisory objects, from the front end of anywidget-instruments. No Python, no Node.js.
+  tagline: Knobs, gauges, tanks, LEDs, strip charts, alarms and supervisory objects, from the front end of anywidget-instruments-industrial. No Python, no Node.js.
   actions:
     - theme: brand
       text: Getting started
@@ -15,12 +15,12 @@ hero:
       link: /widgets/
     - theme: alt
       text: View on GitHub
-      link: https://github.com/s-celles/AnywidgetInstruments.jl
+      link: https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl
 
 features:
   - icon: 🎛️
     title: 52 widgets
-    details: Every concrete widget of anywidget-instruments has a constructor, Tank(3.2; max = 4), documented from the trait contract.
+    details: Every concrete widget of anywidget-instruments-industrial has a constructor, Tank(3.2; max = 4), documented from the trait contract.
     link: /widgets/
   - icon: ✅
     title: Checked traits
@@ -48,10 +48,10 @@ features:
 ![Some widgets of AnywidgetInstruments.jl](assets/widgets.png)
 
 AnywidgetInstruments.jl is the Julia host of
-[anywidget-instruments](https://github.com/s-celles/anywidget-instruments),
+[anywidget-instruments-industrial](https://github.com/AnywidgetInstruments/anywidget-instruments-industrial),
 instrumentation widgets for computational notebooks built on
 [anywidget](https://anywidget.dev). The package ships the widgets' front-end
-module and their [trait contract](https://s-celles.github.io/anywidget-instruments/trait-contract/):
+module and their [trait contract](https://anywidgetinstruments.github.io/anywidget-instruments-industrial/trait-contract/):
 a widget is a class and a dictionary of traits checked against that contract.
 
 ```julia
@@ -65,5 +65,5 @@ html_page("station.html", gain, level, LED(true; label = "Run"))
 !!! warning "Visualization only"
     These widgets are for monitoring, teaching and prototyping. They are not a
     protection layer and never replace the safety functions of a process. See
-    the [safety notice](https://s-celles.github.io/anywidget-instruments/safety/)
-    of anywidget-instruments.
+    the [safety notice](https://anywidgetinstruments.github.io/anywidget-instruments-industrial/safety/)
+    of anywidget-instruments-industrial.

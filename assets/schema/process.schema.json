@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/process.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/process.schema.json",
   "title": "Process",
   "description": "Process objects with a faceplate: Valve, Pump, Motor (SCADA-001 .. SCADA-003, SCADA-009).",
   "type": "object",
@@ -8,7 +8,7 @@
   "x-awi-class": "ProcessObject",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

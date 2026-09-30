@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/analogindicator.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/analogindicator.schema.json",
   "title": "AnalogIndicator",
   "description": "High-performance analog bar indicator (IND-001 .. IND-003).",
   "type": "object",
@@ -20,13 +20,13 @@
       "default": "indicator"
     },
     "normal_hi": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Upper end of the normal operating range.",
       "default": null,
       "x-awi-writer": "host"
     },
     "normal_lo": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Lower end of the normal operating range, shaded on the scale (IND-002).",
       "default": null,
       "x-awi-writer": "host"
@@ -51,7 +51,7 @@
       ]
     },
     "target": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Desired value, marked on the scale.",
       "default": null,
       "x-awi-writer": "host"

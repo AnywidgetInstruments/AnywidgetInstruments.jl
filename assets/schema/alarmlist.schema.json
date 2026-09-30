@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/alarmlist.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/alarmlist.schema.json",
   "title": "AlarmList",
   "description": "Alarm summary table with shelving, suppression and out-of-service states (IND-050 .. IND-053).",
   "type": "object",
   "x-awi-class": "AlarmList",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

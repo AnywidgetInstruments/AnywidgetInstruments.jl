@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/deviation.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/deviation.schema.json",
   "title": "DeviationIndicator",
   "description": "Centre-zero bar of the deviation between a value and its setpoint (IND-100).",
   "type": "object",
   "x-awi-class": "DeviationIndicator",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {
@@ -58,7 +58,7 @@
       "x-awi-writer": "host"
     },
     "value": {
-      "$ref": "instrument.schema.json#/$defs/float",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float",
       "description": "Measured value.",
       "default": "nan",
       "x-awi-writer": "host"

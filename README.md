@@ -1,15 +1,15 @@
 # AnywidgetInstruments.jl
 
-[![CI](https://github.com/s-celles/AnywidgetInstruments.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/s-celles/AnywidgetInstruments.jl/actions/workflows/CI.yml)
-[![Docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://s-celles.github.io/AnywidgetInstruments.jl/dev/)
+[![CI](https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl/actions/workflows/CI.yml)
+[![Docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://anywidgetinstruments.github.io/AnywidgetInstruments.jl/dev/)
 [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
 
 Instrumentation widgets for Julia: knobs, gauges, tanks, thermometers, LEDs,
 switches, stack lights, strip charts, alarm lists, PID faceplates, state
 machines… The widgets are the front end of the Python package
-[anywidget-instruments](https://github.com/s-celles/anywidget-instruments),
+[anywidget-instruments-industrial](https://github.com/AnywidgetInstruments/anywidget-instruments-industrial),
 shipped with this package together with their trait contract, and hosted by
-[Anywidget.jl](https://github.com/s-celles/Anywidget.jl). No Python and no
+[Anywidget.jl](https://github.com/AnywidgetInstruments/Anywidget.jl). No Python and no
 Node.js are needed.
 
 > **Status: pre-alpha (0.0.2, phase 1).** See the
@@ -22,8 +22,8 @@ Node.js are needed.
 
 ```julia
 using Pkg
-Pkg.add(url = "https://github.com/s-celles/Anywidget.jl")   # until both are registered
-Pkg.add(url = "https://github.com/s-celles/AnywidgetInstruments.jl")
+Pkg.add(url = "https://github.com/AnywidgetInstruments/Anywidget.jl")   # until both are registered
+Pkg.add(url = "https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl")
 ```
 
 Julia 1.10 (LTS) and later, tested on 1.13. The Kaimon Slate integration needs Julia 1.12 or later.
@@ -41,7 +41,7 @@ traits(level)                        # the dictionary a host binds the front end
 html_page("station.html", gain, level, LED(true; label = "Run"))
 ```
 
-- **Every widget class** of anywidget-instruments has a constructor; unknown
+- **Every widget class** of anywidget-instruments-industrial has a constructor; unknown
   traits and invalid values throw an `ArgumentError`.
 - **Standalone HTML**: widgets display in Documenter, VS Code, Jupyter
   (IJulia), Pluto or any HTML page.
@@ -58,7 +58,7 @@ just test          # unit tests (TestItemRunner)
 just test-slate    # Kaimon Slate extension tests (Julia ≥ 1.12)
 just examples      # evaluate the example notebooks headless
 just docs          # build the documentation, llms.txt and llms-full.txt
-just sync-assets   # refresh the vendored front end from an anywidget-instruments wheel
+just sync-assets   # refresh the vendored front end from an anywidget-instruments-industrial wheel
 ```
 
 ## License

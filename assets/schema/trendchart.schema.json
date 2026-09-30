@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/trendchart.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/trendchart.schema.json",
   "title": "TrendChart",
   "description": "Trend of named pens against wall-clock time, live or browsing the history (IND-070 .. IND-075).",
   "type": "object",
@@ -25,7 +25,7 @@
     "value": {
       "type": "object",
       "additionalProperties": {
-        "$ref": "instrument.schema.json#/$defs/float"
+        "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float"
       },
       "description": "Latest value of each pen, by pen name, written by the host with each append.",
       "default": {},

@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/recipetable.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/recipetable.schema.json",
   "title": "RecipeTable",
   "description": "Table of typed columns whose rows the operator edits: recipes, setpoint tables (IND-113, IND-114).",
   "type": "object",
   "x-awi-class": "RecipeTable",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

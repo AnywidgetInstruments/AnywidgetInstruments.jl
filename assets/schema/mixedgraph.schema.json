@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/mixedgraph.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/mixedgraph.schema.json",
   "title": "MixedSignalGraph",
   "description": "Analog traces and digital lines on a shared time axis (CHART-103). Same traits and messages as DigitalWaveformGraph, plus the analog part.",
   "type": "object",
@@ -64,13 +64,13 @@
       "x-awi-writer": "host"
     },
     "y_min": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Analog y range; null (either limit): scaled to the data.",
       "default": null,
       "x-awi-writer": "host"
     },
     "y_max": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host"
     },

@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/kpitile.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/kpitile.schema.json",
   "title": "KPITile",
   "description": "Key performance indicator tile: value, target, difference to the target, optional sparkline (IND-103).",
   "type": "object",
   "x-awi-class": "KPITile",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {
@@ -26,13 +26,13 @@
       ]
     },
     "value": {
-      "$ref": "instrument.schema.json#/$defs/float",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float",
       "description": "Current value of the indicator.",
       "default": "nan",
       "x-awi-writer": "host"
     },
     "target": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Target; null: no difference shown.",
       "default": null,
       "x-awi-writer": "host"

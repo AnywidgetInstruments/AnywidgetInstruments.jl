@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 200 170" font-family="sans-serif">
-  <!-- anywidget-instruments SvgPanel template: analog voltmeter, 0 to 10 V; set value.
+  <!-- anywidget-instruments-industrial SvgPanel template: analog voltmeter, 0 to 10 V; set value.
        Roles are in the inkscape:label attributes (awi:<role>=<name>;<option>=<value>). -->
   <rect x="4" y="4" width="192" height="162" rx="10" fill="#e5e7eb" stroke="#374151" stroke-width="3" inkscape:label="bezel"/>
   <rect x="16" y="16" width="168" height="120" rx="4" fill="#fdfbf3" stroke="#9ca3af" inkscape:label="dial"/>

@@ -1,5 +1,5 @@
 {
-  "$comment": "Trait contract of anywidget-instruments, generated from the JSON Schemas in schema/. See the trait contract page of the documentation.",
+  "$comment": "Trait contract of anywidget-instruments-industrial, generated from the JSON Schemas in schema/, which extend the base schema of anywidget-instruments. See the trait contract page of the documentation.",
   "format": 1,
   "version": "0.1.0.dev0",
   "encoding": {
@@ -22,6 +22,136 @@
     "tabbable"
   ],
   "widgets": {
+    "Instrument": {
+      "class": "InstrumentWidget",
+      "kind": "",
+      "abstract": true,
+      "schema": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json",
+      "traits": {
+        "_kind": {
+          "type": "string",
+          "default": "",
+          "writer": "host",
+          "description": "Front-end renderer identifier; each widget schema fixes it with a const."
+        },
+        "mode": {
+          "type": "enum",
+          "values": [
+            "control",
+            "indicator"
+          ],
+          "default": "control",
+          "writer": "host",
+          "description": "\"control\": the user sets the value; \"indicator\": display only."
+        },
+        "label": {
+          "type": "string",
+          "default": "",
+          "writer": "host",
+          "description": "Plain text, never interpreted as HTML (SEC-002)."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "writer": "host",
+          "description": "Greyed out, input rejected."
+        },
+        "visible": {
+          "type": "boolean",
+          "default": true,
+          "writer": "host"
+        },
+        "tooltip": {
+          "type": "string",
+          "default": "",
+          "writer": "host",
+          "description": "Plain text shown on hover."
+        },
+        "size": {
+          "type": "array",
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "integer",
+              "exclusiveMinimum": 0
+            }
+          ],
+          "default": [
+            160,
+            160
+          ],
+          "writer": "host",
+          "description": "[width, height] in CSS pixels."
+        },
+        "style": {
+          "type": "enum",
+          "values": [
+            "modern",
+            "classic",
+            "system"
+          ],
+          "default": "modern",
+          "writer": "host"
+        },
+        "theme": {
+          "type": "enum",
+          "values": [
+            "auto",
+            "light",
+            "dark",
+            "system"
+          ],
+          "default": "auto",
+          "writer": "host",
+          "description": "\"auto\": the style decides; \"system\": the host page or the operating system (STYLE-007)."
+        },
+        "skin": {
+          "type": "object",
+          "keys": [
+            "background",
+            "housing",
+            "knob",
+            "needle"
+          ],
+          "default": {},
+          "writer": "host",
+          "description": "Replaceable drawing parts: part name -> SVG source, sanitized (STYLE-005, STYLE-006)."
+        },
+        "_session": {
+          "type": "string",
+          "default": "",
+          "writer": "host",
+          "description": "Identity of the host session that owns the state. Non-empty: the host is authoritative for derived traits and may announce heartbeats (HOST-003, HOST-004). Empty (default): the front end computes derived traits itself."
+        },
+        "_heartbeat": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0,
+          "writer": "host",
+          "description": "Heartbeat period announced by the host, in seconds. 0 (default): no stale-data detection. With a non-empty _session and a period > 0, the host sends {\"type\": \"hb\", \"session\": _session} every period (ROB-001, HOST-003)."
+        }
+      },
+      "messages": [
+        {
+          "type": "hb",
+          "direction": "host-to-front",
+          "description": "Heartbeat, sent every _heartbeat seconds when the host announces liveness.",
+          "fields": {
+            "session": {
+              "type": "string"
+            },
+            "interval": {
+              "type": "number"
+            }
+          },
+          "buffers": []
+        }
+      ]
+    },
     "AlarmBanner": {
       "class": "AlarmBanner",
       "kind": "alarmbanner",
@@ -4451,136 +4581,6 @@
           "type": "string",
           "default": "",
           "writer": "host"
-        }
-      },
-      "messages": [
-        {
-          "type": "hb",
-          "direction": "host-to-front",
-          "description": "Heartbeat, sent every _heartbeat seconds when the host announces liveness.",
-          "fields": {
-            "session": {
-              "type": "string"
-            },
-            "interval": {
-              "type": "number"
-            }
-          },
-          "buffers": []
-        }
-      ]
-    },
-    "Instrument": {
-      "class": "InstrumentWidget",
-      "kind": "",
-      "abstract": true,
-      "schema": "schema/instrument.schema.json",
-      "traits": {
-        "_kind": {
-          "type": "string",
-          "default": "",
-          "writer": "host",
-          "description": "Front-end renderer identifier; each widget schema fixes it with a const."
-        },
-        "mode": {
-          "type": "enum",
-          "values": [
-            "control",
-            "indicator"
-          ],
-          "default": "control",
-          "writer": "host",
-          "description": "\"control\": the user sets the value; \"indicator\": display only."
-        },
-        "label": {
-          "type": "string",
-          "default": "",
-          "writer": "host",
-          "description": "Plain text, never interpreted as HTML (SEC-002)."
-        },
-        "disabled": {
-          "type": "boolean",
-          "default": false,
-          "writer": "host",
-          "description": "Greyed out, input rejected."
-        },
-        "visible": {
-          "type": "boolean",
-          "default": true,
-          "writer": "host"
-        },
-        "tooltip": {
-          "type": "string",
-          "default": "",
-          "writer": "host",
-          "description": "Plain text shown on hover."
-        },
-        "size": {
-          "type": "array",
-          "minItems": 2,
-          "prefixItems": [
-            {
-              "type": "integer",
-              "exclusiveMinimum": 0
-            },
-            {
-              "type": "integer",
-              "exclusiveMinimum": 0
-            }
-          ],
-          "default": [
-            160,
-            160
-          ],
-          "writer": "host",
-          "description": "[width, height] in CSS pixels."
-        },
-        "style": {
-          "type": "enum",
-          "values": [
-            "modern",
-            "classic",
-            "system"
-          ],
-          "default": "modern",
-          "writer": "host"
-        },
-        "theme": {
-          "type": "enum",
-          "values": [
-            "auto",
-            "light",
-            "dark",
-            "system"
-          ],
-          "default": "auto",
-          "writer": "host",
-          "description": "\"auto\": the style decides; \"system\": the host page or the operating system (STYLE-007)."
-        },
-        "skin": {
-          "type": "object",
-          "keys": [
-            "background",
-            "housing",
-            "knob",
-            "needle"
-          ],
-          "default": {},
-          "writer": "host",
-          "description": "Replaceable drawing parts: part name -> SVG source, sanitized (STYLE-005, STYLE-006)."
-        },
-        "_session": {
-          "type": "string",
-          "default": "",
-          "writer": "host",
-          "description": "Identity of the host session that owns the state. Non-empty: the host is authoritative for derived traits and may announce heartbeats (HOST-003, HOST-004). Empty (default): the front end computes derived traits itself."
-        },
-        "_heartbeat": {
-          "type": "number",
-          "minimum": 0,
-          "default": 0,
-          "writer": "host",
-          "description": "Heartbeat period announced by the host, in seconds. 0 (default): no stale-data detection. With a non-empty _session and a period > 0, the host sends {\"type\": \"hb\", \"session\": _session} every period (ROB-001, HOST-003)."
         }
       },
       "messages": [

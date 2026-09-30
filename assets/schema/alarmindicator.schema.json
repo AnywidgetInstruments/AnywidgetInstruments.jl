@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/alarmindicator.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/alarmindicator.schema.json",
   "title": "AlarmIndicator",
   "description": "Single alarm annunciator with the ISA-18.2 alarm states (SCADA-005, SCADA-007).",
   "type": "object",
   "x-awi-class": "AlarmIndicator",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

@@ -3,11 +3,11 @@
 
 Instrumentation widgets (knobs, gauges, tanks, LEDs, strip charts, alarms,
 supervisory objects) for Julia, from the front end of the Python package
-[anywidget-instruments](https://github.com/s-celles/anywidget-instruments).
+[anywidget-instruments-industrial](https://github.com/AnywidgetInstruments/anywidget-instruments-industrial).
 
 The package ships the front-end module and its trait contract: a widget is a
 class name and a dictionary of traits checked against that contract. Widgets
-are hosted by [Anywidget.jl](https://github.com/s-celles/Anywidget.jl):
+are hosted by [Anywidget.jl](https://github.com/AnywidgetInstruments/Anywidget.jl):
 
 - any environment showing HTML, through the standalone `text/html` display;
 - Kaimon Slate, through SlateAFM.

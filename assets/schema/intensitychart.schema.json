@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/intensitychart.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/intensitychart.schema.json",
   "title": "IntensityChart",
   "description": "Scrolling 2-D color map: spectrogram or waterfall (CHART-101).",
   "type": "object",
@@ -24,10 +24,10 @@
           "description": "Rows appended since the last clear."
         },
         "min": {
-          "$ref": "instrument.schema.json#/$defs/float"
+          "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float"
         },
         "max": {
-          "$ref": "instrument.schema.json#/$defs/float"
+          "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float"
         },
         "argmax": {
           "type": "integer",
@@ -66,7 +66,7 @@
       "x-awi-writer": "host"
     },
     "y_max": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Value of the upper edge of the last bin; null: y_min + n_bins.",
       "default": null,
       "x-awi-writer": "host"

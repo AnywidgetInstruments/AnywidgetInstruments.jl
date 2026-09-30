@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/fillslide.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/fillslide.schema.json",
   "title": "FillSlide",
   "description": "Horizontal or vertical slider control and bar indicator (NUM-108).",
   "type": "object",

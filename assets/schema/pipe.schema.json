@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/pipe.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/pipe.schema.json",
   "title": "Pipe",
   "description": "Pipe segment: straight, elbow, tee or cross, rotated by 0, 90, 180 or 270 degrees (SCADA-004).",
   "type": "object",
   "x-awi-class": "Pipe",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

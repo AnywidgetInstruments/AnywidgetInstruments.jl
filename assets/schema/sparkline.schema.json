@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/sparkline.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/sparkline.schema.json",
   "title": "Sparkline",
   "description": "Compact trend of the last values, without axes (IND-101).",
   "type": "object",
   "x-awi-class": "Sparkline",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {
@@ -26,7 +26,7 @@
       ]
     },
     "value": {
-      "$ref": "instrument.schema.json#/$defs/float",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float",
       "description": "Last appended value, written by the host with each append (the view shows the newest value of its history when it has one).",
       "default": "nan",
       "readOnly": true,

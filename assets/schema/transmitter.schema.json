@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/transmitter.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/transmitter.schema.json",
   "title": "Transmitter",
   "description": "Field transmitter shown as an instrument bubble with a device status (IND-080 .. IND-083).",
   "type": "object",

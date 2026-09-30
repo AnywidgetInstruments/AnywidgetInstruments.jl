@@ -3,7 +3,7 @@
     t = Tank(3.2; max=4, id="lvl")
     @test t isa AbstractAnywidget
     @test afm_module(t) === frontend_module()
-    @test frontend_module().name == "anywidget-instruments"
+    @test frontend_module().name == "anywidget-instruments-industrial"
     @test widget_traits(t) == traits(t; defaults=true)
     @test message_id(t) == "lvl"
 end
@@ -12,7 +12,7 @@ end
     set_asset_base!(frontend_module(), nothing)
     t = Tank(3.2; max=4, label="</script><b>x</b>")
     h = sprint(show, MIME"text/html"(), t)
-    @test occursin("data-afm-esm=\"anywidget-instruments\"", h)     # inlined by Anywidget.jl
+    @test occursin("data-afm-esm=\"anywidget-instruments-industrial\"", h)     # inlined by Anywidget.jl
     json_part = match(r"<script type=\"application/json\"[^>]*>(.*?)</script>"s, h).captures[1]
     @test !occursin("</", json_part)
     @test occursin("\"_kind\":\"tank\"", json_part)
@@ -30,6 +30,6 @@ end
         set_asset_base!(frontend_module(), nothing)
     end
     p = html_page(Tank(1.0), Knob(2.0); title="Station")
-    @test count("data-afm-esm=\"anywidget-instruments\"", p) == 1
+    @test count("data-afm-esm=\"anywidget-instruments-industrial\"", p) == 1
     @test count("application/json", p) == 2
 end

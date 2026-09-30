@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/numericentry.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/numericentry.schema.json",
   "title": "NumericEntry",
   "description": "Numeric keypad with a display, for touch panels (IND-104).",
   "type": "object",
@@ -17,7 +17,7 @@
       "x-awi-writer": "host"
     },
     "confirm_delta": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "A change larger than this asks for a second Enter (confirmation); null: no confirmation (IND-104).",
       "default": null,
       "x-awi-writer": "host"

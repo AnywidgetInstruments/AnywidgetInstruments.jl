@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/instrument.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json",
   "title": "Instrument",
   "description": "Traits shared by every widget (API-001 .. API-011). A trait dictionary conforming to a widget schema is enough to render the widget, with or without a Python kernel (HOST-001).",
   "type": "object",

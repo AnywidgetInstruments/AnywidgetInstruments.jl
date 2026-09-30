@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/toggleswitch.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/toggleswitch.schema.json",
   "title": "ToggleSwitch",
   "description": "Toggle (bat-handle) switch (BOOL-003).",
   "type": "object",

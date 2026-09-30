@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 180 170" font-family="sans-serif">
-  <!-- anywidget-instruments SvgPanel template: three-position selector OFF / HAND / AUTO; value is 0, 1 or 2.
+  <!-- anywidget-instruments-industrial SvgPanel template: three-position selector OFF / HAND / AUTO; value is 0, 1 or 2.
        Roles are in the inkscape:label attributes (awi:<role>=<name>;<option>=<value>). -->
   <rect x="6" y="6" width="168" height="158" rx="8" fill="#d1d5db" stroke="#4b5563" stroke-width="2" inkscape:label="plate"/>
   <text x="38" y="52" font-size="13" font-weight="bold" text-anchor="middle" fill="#111827" inkscape:label="awi:set=value;value=0;label=OFF">OFF</text>

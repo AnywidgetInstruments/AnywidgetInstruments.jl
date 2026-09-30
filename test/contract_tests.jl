@@ -1,6 +1,13 @@
 @testitem "vendored front end (JL-GEN-003, JL-GEN-004, JL-GEN-006)" begin
     dir = AnywidgetInstruments.assets_dir()
-    for f in ("index.js", "index.css", "contract.json", "SOURCE.toml", "LICENSE-anywidget-instruments")
+    for f in (
+        "index.js",
+        "index.css",
+        "contract.json",
+        "SOURCE.toml",
+        "LICENSE-anywidget-instruments",
+        "LICENSE-anywidget-instruments-industrial",
+    )
         @test isfile(joinpath(dir, f))
     end
     @test isfile(joinpath(dir, "schema", "tank.schema.json"))
@@ -8,7 +15,7 @@
     @test occursin("export {", js)
     @test !occursin("sourceMappingURL", js)
     src = AnywidgetInstruments.asset_source()
-    @test src["package"] == "anywidget-instruments"
+    @test src["package"] == "anywidget-instruments-industrial"
     @test length(src["sha256"]) == 64
     @test src["version"] == frontend_version()
 end

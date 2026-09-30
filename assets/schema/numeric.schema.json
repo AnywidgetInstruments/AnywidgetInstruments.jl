@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/numeric.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/numeric.schema.json",
   "title": "Numeric",
   "description": "Traits shared by the numeric widgets (NUM-*, ALARM-*, UNIT-*).",
   "type": "object",
@@ -8,12 +8,12 @@
   "x-awi-class": "NumericWidget",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {
     "value": {
-      "$ref": "instrument.schema.json#/$defs/float",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float",
       "description": "Current value. Set by the host, or by the user in control mode. Shown clamped to [min, max] when coerce is set (NUM-006, NUM-010).",
       "default": 0,
       "x-awi-writer": "both"
@@ -122,25 +122,25 @@
       "x-awi-writer": "host"
     },
     "lolo": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Low-low alarm limit (ALARM-001).",
       "default": null,
       "x-awi-writer": "host"
     },
     "lo": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Low alarm limit.",
       "default": null,
       "x-awi-writer": "host"
     },
     "hi": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "High alarm limit.",
       "default": null,
       "x-awi-writer": "host"
     },
     "hihi": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "High-high alarm limit.",
       "default": null,
       "x-awi-writer": "host"
@@ -172,23 +172,23 @@
       "x-awi-writer": "derived"
     },
     "raw_min": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Engineering scaling: raw reading at eng_min (UNIT-003). Used by the host API only.",
       "default": null,
       "x-awi-writer": "host"
     },
     "raw_max": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host"
     },
     "eng_min": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host"
     },
     "eng_max": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host"
     }

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/sevensegment.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/sevensegment.schema.json",
   "title": "SevenSegment",
   "description": "Seven-segment numeric display (NUM-109).",
   "type": "object",

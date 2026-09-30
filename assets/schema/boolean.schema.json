@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/boolean.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/boolean.schema.json",
   "title": "Boolean",
   "description": "Traits shared by the Boolean widgets (BOOL-*).",
   "type": "object",
@@ -8,7 +8,7 @@
   "x-awi-class": "BooleanWidget",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

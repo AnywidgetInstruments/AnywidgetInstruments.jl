@@ -2,7 +2,7 @@
 
 These widgets run live on this page: drag the knob, press the buttons. The
 behaviour of each widget is specified by
-[anywidget-instruments](https://s-celles.github.io/anywidget-instruments/widgets/);
+[anywidget-instruments-industrial](https://anywidgetinstruments.github.io/anywidget-instruments-industrial/widgets/);
 the traits of each class are listed in the [API reference](api.md#Widget-constructors).
 
 ```@setup gallery

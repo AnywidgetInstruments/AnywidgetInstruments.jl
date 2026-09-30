@@ -3,7 +3,7 @@
 """
     Instrument
 
-A widget of anywidget-instruments: its class (`"Tank"`, `"Knob"`, …), a
+A widget of anywidget-instruments-industrial: its class (`"Tank"`, `"Knob"`, …), a
 message id and the traits set by the user, stored in their JSON form and
 checked against the trait contract.
 

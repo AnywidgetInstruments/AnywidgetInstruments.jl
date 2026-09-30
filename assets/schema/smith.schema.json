@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/smith.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/smith.schema.json",
   "title": "SmithChart",
   "description": "Smith chart of reflection coefficients (SPEC-003).",
   "type": "object",
@@ -37,14 +37,14 @@
           "re": {
             "type": "array",
             "items": {
-              "$ref": "instrument.schema.json#/$defs/float"
+              "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float"
             },
             "description": "Real parts of the reflection coefficients Γ."
           },
           "im": {
             "type": "array",
             "items": {
-              "$ref": "instrument.schema.json#/$defs/float"
+              "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float"
             },
             "description": "Imaginary parts of Γ, one per real part."
           }

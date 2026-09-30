@@ -4,12 +4,12 @@
 
 ```julia
 using Pkg
-Pkg.add(url = "https://github.com/s-celles/Anywidget.jl")   # until both are registered
-Pkg.add(url = "https://github.com/s-celles/AnywidgetInstruments.jl")
+Pkg.add(url = "https://github.com/AnywidgetInstruments/Anywidget.jl")   # until both are registered
+Pkg.add(url = "https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl")
 ```
 
 The package runs on Julia 1.10 (LTS) and later, and is tested on 1.13. It needs neither Python nor
-Node.js: the front end of anywidget-instruments is shipped with it
+Node.js: the front end of anywidget-instruments-industrial is shipped with it
 (`AnywidgetInstruments.assets_dir()`), and `assets/SOURCE.toml` records the
 version and the checksum of the wheel it comes from.
 
@@ -20,7 +20,7 @@ frontend_version()
 
 ## Building widgets
 
-Each widget class of anywidget-instruments has a constructor of the same name.
+Each widget class of anywidget-instruments-industrial has a constructor of the same name.
 Traits are keyword arguments; a widget with a writable `value` also takes it as
 the first argument:
 
@@ -91,7 +91,7 @@ merge_traits(Dict("_kind" => "tank", "value" => 1.0); value = 2.5, label = "T-10
 
 ## Displaying widgets
 
-Widgets are hosted by [Anywidget.jl](https://github.com/s-celles/Anywidget.jl):
+Widgets are hosted by [Anywidget.jl](https://github.com/AnywidgetInstruments/Anywidget.jl):
 an [`Instrument`](@ref) is an `Anywidget.AbstractAnywidget`. Its `text/html`
 representation runs the front-end module in the page with a model holding its
 traits. It displays wherever HTML is shown:

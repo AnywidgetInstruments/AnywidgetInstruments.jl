@@ -2,7 +2,7 @@
 
 Some rules are implemented by the Python kernel, the TypeScript front end and
 this package. The three are checked against the same parity cases
-(`tests/parity/*.json` of anywidget-instruments, copied into `test/parity/`).
+(`tests/parity/*.json` of anywidget-instruments-industrial, copied into `test/parity/`).
 
 ## Alarm levels
 

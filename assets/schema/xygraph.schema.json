@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/xygraph.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/xygraph.schema.json",
   "title": "XYGraph",
   "description": "Data sets of (x, y) pairs with arbitrary spacing: characteristic curves, scatter plots (IND-115).",
   "type": "object",
@@ -69,24 +69,24 @@
       "x-awi-writer": "host"
     },
     "x_min": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "X range; null: from the data.",
       "default": null,
       "x-awi-writer": "host"
     },
     "x_max": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host"
     },
     "y_min": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "description": "Y range; null: from the data.",
       "default": null,
       "x-awi-writer": "host"
     },
     "y_max": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host"
     },

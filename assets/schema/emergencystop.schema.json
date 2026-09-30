@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/emergencystop.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/emergencystop.schema.json",
   "title": "EmergencyStop",
   "description": "Red mushroom emergency stop button (BOOL-012); a drawing, not an emergency stop device.",
   "type": "object",

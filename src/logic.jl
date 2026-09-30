@@ -1,5 +1,5 @@
 # Rules shared with the Python kernel and the TypeScript front end
-# (js/src/contract/alarm.ts and numeric.ts of anywidget-instruments), checked
+# (js/src/contract/alarm.ts and numeric.ts of anywidget-instruments-industrial), checked
 # against the same parity cases (JL-LOG-*).
 
 const HIGH_LEVELS = ("normal", "hi", "hihi")

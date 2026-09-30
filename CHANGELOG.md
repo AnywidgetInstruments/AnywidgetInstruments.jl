@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- The repositories moved to the AnywidgetInstruments organization: links,
+  `Project.toml` (`Anywidget` source), workflows and documentation follow.
+- **Breaking:** the front end comes from anywidget-instruments-industrial
+  (the former anywidget-instruments, renamed), built on the anywidget-instruments
+  core. It is served under `/ext-assets/Anywidget.anywidget-instruments-industrial/`
+  and named `anywidget-instruments-industrial` by `frontend_module()`.
+- Front end refreshed from anywidget-instruments-industrial at `bb2484d`, with the
+  base schema of the core (`assets/schema/instrument.schema.json`) and both license
+  notices; `scripts/sync-assets.sh` takes the core wheel as a second argument.
+
 ### Added
 
 - Weekly workflow refreshing the vendored front end and the parity cases of
@@ -29,7 +41,7 @@ Phase 1 of the roadmap: hosting moved to Anywidget.jl.
 
 ### Changed
 
-- **Breaking:** widgets are hosted by [Anywidget.jl](https://github.com/s-celles/Anywidget.jl).
+- **Breaking:** widgets are hosted by [Anywidget.jl](https://github.com/AnywidgetInstruments/Anywidget.jl).
   `Instrument` is an `Anywidget.AbstractAnywidget`; the HTML display, `html_page`,
   `Message`, `encode_buffer`, `send_message` and `set_transport!` come from
   Anywidget.jl and are re-exported.
@@ -77,6 +89,6 @@ Phase 0 of the roadmap: foundations.
 - Documentation (Documenter.jl, DocumenterLandingPage.jl) with live widgets,
   `llms.txt` and `llms-full.txt`; EARS specification with MoSCoW priorities.
 
-[Unreleased]: https://github.com/s-celles/AnywidgetInstruments.jl/compare/v0.0.2...HEAD
-[0.0.2]: https://github.com/s-celles/AnywidgetInstruments.jl/compare/v0.0.1...v0.0.2
-[0.0.1]: https://github.com/s-celles/AnywidgetInstruments.jl/releases/tag/v0.0.1
+[Unreleased]: https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl/compare/v0.0.1...v0.0.2
+[0.0.1]: https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl/releases/tag/v0.0.1

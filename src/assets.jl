@@ -15,7 +15,7 @@ const CONTRACT = JSON.parse(read(CONTRACT_FILE, String); dicttype=Dict{String,An
     assets_dir() -> String
 
 Directory of the vendored front end: `index.js`, `index.css`, `contract.json`,
-`schema/*.schema.json`, `templates/*.svg`, the license of anywidget-instruments
+`schema/*.schema.json`, `templates/*.svg`, the license of anywidget-instruments-industrial
 and `SOURCE.toml`.
 """
 assets_dir() = ASSETS_DIR
@@ -31,16 +31,16 @@ asset_source() = TOML.parsefile(SOURCE_FILE)
 """
     frontend_version() -> String
 
-Version of anywidget-instruments whose front end is vendored (JL-CON-001).
+Version of anywidget-instruments-industrial whose front end is vendored (JL-CON-001).
 """
 frontend_version() = String(CONTRACT["version"])
 
-const FRONTEND = FrontendModule("anywidget-instruments"; dir=ASSETS_DIR, esm="index.js", css=["index.css"])
+const FRONTEND = FrontendModule("anywidget-instruments-industrial"; dir=ASSETS_DIR, esm="index.js", css=["index.css"])
 
 """
     frontend_module() -> Anywidget.FrontendModule
 
-The front-end module of anywidget-instruments, as hosted by Anywidget.jl. Pass
+The front-end module of anywidget-instruments-industrial, as hosted by Anywidget.jl. Pass
 it to `set_asset_base!` to load the module from a URL instead of inlining it.
 """
 frontend_module() = FRONTEND

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/pump.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/pump.schema.json",
   "title": "Pump",
   "description": "Pump with stopped, running and fault states and a rotation animation (SCADA-002).",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/digitalgraph.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/digitalgraph.schema.json",
   "title": "DigitalWaveformGraph",
   "description": "Logic timing diagram with bus grouping (CHART-102).",
   "type": "object",

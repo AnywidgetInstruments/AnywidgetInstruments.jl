@@ -22,7 +22,7 @@ function _class_doc(class, positional)
     return """
 $sig
 
-A `$class` widget of anywidget-instruments (kind `\"$(widget_kind(class))\"`).
+A `$class` widget of anywidget-instruments-industrial (kind `\"$(widget_kind(class))\"`).
 See [`instrument`](@ref) for the checks applied to the traits.
 
 # Traits

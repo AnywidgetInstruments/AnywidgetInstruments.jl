@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/equipmenttree.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/equipmenttree.schema.json",
   "title": "EquipmentTree",
   "description": "Hierarchy of equipment (site, area, unit, module) with a status per node, that the operator expands, collapses and selects (IND-119).",
   "type": "object",
   "x-awi-class": "EquipmentTree",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

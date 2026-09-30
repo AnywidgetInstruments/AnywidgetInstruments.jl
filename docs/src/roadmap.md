@@ -5,7 +5,7 @@ they are not releases.
 
 ## Phase 0 — `0.0.1`: foundations (done)
 
-- Vendored front end and trait contract of anywidget-instruments, with their
+- Vendored front end and trait contract of anywidget-instruments-industrial, with their
   origin and checksum.
 - A constructor per widget class; traits checked against the contract.
 - JSON encoding (non-finite numbers, bytes), binary buffers.
@@ -33,5 +33,5 @@ they are not releases.
 ## Phase 3 — `0.0.4`: tooling
 
 - Registration in the General registry.
-- Automated refresh of the vendored front end when anywidget-instruments is
+- Automated refresh of the vendored front end when anywidget-instruments-industrial is
   released (a workflow opening a pull request).

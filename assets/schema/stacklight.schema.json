@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/stacklight.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/stacklight.schema.json",
   "title": "StackLight",
   "description": "Signal tower with 1 to 5 tiers (IND-020 .. IND-022, IEC 60073 colors).",
   "type": "object",
   "x-awi-class": "StackLight",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

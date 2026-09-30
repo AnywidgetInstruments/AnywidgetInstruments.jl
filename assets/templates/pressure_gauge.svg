@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 200 200" font-family="sans-serif">
-  <!-- anywidget-instruments SvgPanel template: pressure gauge, 0 to 10 bar with a red zone above 8 bar; set value.
+  <!-- anywidget-instruments-industrial SvgPanel template: pressure gauge, 0 to 10 bar with a red zone above 8 bar; set value.
        Roles are in the inkscape:label attributes (awi:<role>=<name>;<option>=<value>). -->
   <circle cx="100" cy="100" r="96" fill="#9ca3af" stroke="#374151" stroke-width="3" inkscape:label="case"/>
   <circle cx="100" cy="100" r="86" fill="#ffffff" stroke="#6b7280" inkscape:label="dial"/>

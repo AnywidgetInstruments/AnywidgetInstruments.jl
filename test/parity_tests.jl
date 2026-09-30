@@ -1,5 +1,5 @@
 # Cases shared with the Python kernel and the TypeScript front end
-# (tests/parity/*.json of anywidget-instruments, copied into test/parity/).
+# (tests/parity/*.json of anywidget-instruments-industrial, copied into test/parity/).
 
 @testmodule Parity begin
     using JSON

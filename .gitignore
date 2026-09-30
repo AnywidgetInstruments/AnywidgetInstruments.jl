@@ -9,15 +9,17 @@
 !*.toml
 !CITATION.cff
 
-# Vendored front end of anywidget-instruments (see assets/SOURCE.toml)
+# Vendored front end of anywidget-instruments-industrial, with the base schema
+# of the anywidget-instruments core (see assets/SOURCE.toml)
 !assets/index.js
 !assets/index.css
 !assets/contract.json
 !assets/schema/*.json
 !assets/templates/*.svg
 !assets/LICENSE-anywidget-instruments
+!assets/LICENSE-anywidget-instruments-industrial
 
-# Parity cases shared with anywidget-instruments
+# Parity cases shared with anywidget-instruments-industrial
 !test/parity/*.json
 
 # Docs & repo metadata, named one by one

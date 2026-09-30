@@ -24,13 +24,13 @@ remotes = has_commit ? (;) : (; remotes=nothing)
 
 makedocs(;
     remotes...,
-    repo=Remotes.GitHub("s-celles", "AnywidgetInstruments.jl"),
+    repo=Remotes.GitHub("AnywidgetInstruments", "AnywidgetInstruments.jl"),
     sitename="AnywidgetInstruments.jl",
     authors="Sébastien Celles",
     modules=[AnywidgetInstruments],
     format=Documenter.HTML(;
         prettyurls=true,
-        canonical="https://s-celles.github.io/AnywidgetInstruments.jl",
+        canonical="https://anywidgetinstruments.github.io/AnywidgetInstruments.jl",
         edit_link="main",
         size_threshold_ignore=["api.md", "widgets.md"],
     ),
@@ -44,7 +44,8 @@ const BUILD = joinpath(@__DIR__, "build")
 
 # The front end served to the live widgets of the pages
 awi = mkpath(joinpath(BUILD, "assets", "awi"))
-for f in ("index.js", "index.css", "LICENSE-anywidget-instruments")
+for f in
+    ("index.js", "index.css", "LICENSE-anywidget-instruments-industrial", "LICENSE-anywidget-instruments-industrial")
     cp(joinpath(AnywidgetInstruments.assets_dir(), f), joinpath(awi, f); force=true)
 end
 
@@ -54,7 +55,7 @@ summary = """
 # AnywidgetInstruments.jl
 
 > Instrumentation widgets (knobs, gauges, tanks, LEDs, strip charts, alarms, supervisory objects)
-> for Julia: the front end of anywidget-instruments with its trait contract, displayed as standalone
+> for Julia: the front end of anywidget-instruments-industrial with its trait contract, displayed as standalone
 > HTML or in Kaimon Slate notebooks. No Python, no Node.js.
 
 $(join(("- [$(title)](./$(page == "index.md" ? "" : first(splitext(page)) * "/"))" for (title, page) in PAGES), "\n"))
@@ -65,5 +66,7 @@ write(joinpath(BUILD, "llms.txt"), summary)
 write(joinpath(BUILD, "llms-full.txt"), full)
 
 if get(ENV, "GITHUB_ACTIONS", "false") == "true"
-    deploydocs(; repo="github.com/s-celles/AnywidgetInstruments.jl.git", devbranch="main", push_preview=true)
+    deploydocs(;
+        repo="github.com/AnywidgetInstruments/AnywidgetInstruments.jl.git", devbranch="main", push_preview=true
+    )
 end

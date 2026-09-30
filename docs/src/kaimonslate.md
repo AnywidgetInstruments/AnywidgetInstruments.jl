@@ -2,14 +2,14 @@
 
 [Kaimon Slate](https://github.com/kahliburke/KaimonSlate.jl) is a reactive
 Julia notebook. Its SlateAFM extension hosts anywidget front-end modules; with
-SlateExtensionsBase loaded, [Anywidget.jl](https://github.com/s-celles/Anywidget.jl)
+SlateExtensionsBase loaded, [Anywidget.jl](https://github.com/AnywidgetInstruments/Anywidget.jl)
 plugs into it through a package extension, and every widget of
 AnywidgetInstruments.jl with it:
 
 - `@bind name Tank(...)` binds `name` to the widget's trait dictionary,
   rendered by SlateAFM's host shim (kind `SlateAFM.AFM`);
 - the front end is served from the package, under
-  `/ext-assets/Anywidget.anywidget-instruments/`;
+  `/ext-assets/Anywidget.anywidget-instruments-industrial/`;
 - `send_message` goes through `SlateAFM.afm_emit`.
 
 The integration needs Julia 1.12 or later, a requirement of SlateExtensionsBase (tested on 1.13).
@@ -22,8 +22,8 @@ environment with AnywidgetInstruments.jl:
 ```julia
 using Pkg
 Pkg.add(url = "https://github.com/kahliburke/KaimonSlate.jl", subdir = "examples/extensions/SlateAFM")
-Pkg.add(url = "https://github.com/s-celles/Anywidget.jl")
-Pkg.add(url = "https://github.com/s-celles/AnywidgetInstruments.jl")
+Pkg.add(url = "https://github.com/AnywidgetInstruments/Anywidget.jl")
+Pkg.add(url = "https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl")
 ```
 
 Then, in the notebook:

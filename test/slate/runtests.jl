@@ -18,15 +18,15 @@ const Ext = Base.get_extension(Anywidget, :AnywidgetSlateExt)
         @test w.default["value"] == 3.2
         @test w.default["max"] == 4
         @test haskey(w.default, "ticks")                     # defaults filled in
-        @test w.params["src"] == "/ext-assets/Anywidget.anywidget-instruments/index.js"
-        @test w.params["css"] == ["/ext-assets/Anywidget.anywidget-instruments/index.css"]
+        @test w.params["src"] == "/ext-assets/Anywidget.anywidget-instruments-industrial/index.js"
+        @test w.params["css"] == ["/ext-assets/Anywidget.anywidget-instruments-industrial/index.css"]
         @test w.params["id"] == "level"
     end
 
     @testset "served front end (JL-SLATE-001)" begin
         handlers = Dict{String,Any}()
         Ext.__slate_frontend((ch, f) -> (handlers[ch] = f))
-        @test SlateExtensionsBase._ASSETS["Anywidget.anywidget-instruments"] ==
+        @test SlateExtensionsBase._ASSETS["Anywidget.anywidget-instruments-industrial"] ==
             abspath(AnywidgetInstruments.assets_dir())
         @test isempty(handlers)   # incoming messages stay with SlateAFM
     end

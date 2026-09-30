@@ -1,9 +1,9 @@
 name: Sync front end
 
-# Refresh the vendored front end of anywidget-instruments (JL-GEN-007): download
+# Refresh the vendored front end of anywidget-instruments-industrial (JL-GEN-007): download
 # the wheel, run scripts/sync-assets.sh, copy the parity cases, and open a pull
 # request when something changed. The wheel comes from the documentation site
-# until anywidget-instruments publishes releases.
+# until anywidget-instruments-industrial publishes releases.
 
 on:
   schedule:
@@ -11,7 +11,10 @@ on:
   workflow_dispatch:
     inputs:
       wheel:
-        description: "Wheel URL (default: the one served by the documentation site)"
+        description: "Wheel URL of anywidget-instruments-industrial (default: the one served by its documentation site)"
+        required: false
+      core_wheel:
+        description: "Wheel URL of the anywidget-instruments core (default: the one served next to it)"
         required: false
 
 permissions:
@@ -23,17 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      # anywidget-instruments is private: its parity cases are read with
-      # ANYWIDGET_TOKEN when the token also grants Contents: read on it;
-      # otherwise only the wheel (served publicly) is vendored.
+      # the parity cases come from the repository of anywidget-instruments-industrial
       - uses: actions/checkout@v7
         continue-on-error: true
         with:
-          repository: s-celles/anywidget-instruments
+          repository: AnywidgetInstruments/anywidget-instruments-industrial
           path: .upstream
-          token: ${{ secrets.ANYWIDGET_TOKEN }}
       - name: Vendor the wheel
-        run: scripts/sync-assets.sh ${{ inputs.wheel }}
+        run: scripts/sync-assets.sh "${{ inputs.wheel }}" "${{ inputs.core_wheel }}"
       - name: Copy the parity cases
         if: hashFiles('.upstream/tests/parity/*.json') != ''
         run: |
@@ -47,10 +47,10 @@ jobs:
         with:
           branch: chore/sync-frontend-auto
           commit-message: |
-            chore: sync the front end of anywidget-instruments
+            chore: sync the front end of anywidget-instruments-industrial
 
             Assisted-by: AI
-          title: "chore: sync the front end of anywidget-instruments"
+          title: "chore: sync the front end of anywidget-instruments-industrial"
           body: |
             Automated refresh of `assets/` (see `assets/SOURCE.toml`) and `test/parity/`.
             Review the diff of `assets/contract.json`: a changed trait or message may need

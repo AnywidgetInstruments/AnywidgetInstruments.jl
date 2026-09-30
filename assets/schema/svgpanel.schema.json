@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/svgpanel.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/svgpanel.schema.json",
   "title": "SvgPanel",
   "description": "Front panel drawn in a vector editor: elements labelled awi:<role>=<name>;<option>=<value> are bound to value[<name>] (IND-120 .. IND-126).",
   "type": "object",
   "x-awi-class": "SvgPanel",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

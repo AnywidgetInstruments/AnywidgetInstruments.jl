@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 120 150" font-family="sans-serif">
-  <!-- anywidget-instruments SvgPanel template: pilot lamp with a push-to-test lens; value is a Boolean, caption a text.
+  <!-- anywidget-instruments-industrial SvgPanel template: pilot lamp with a push-to-test lens; value is a Boolean, caption a text.
        Roles are in the inkscape:label attributes (awi:<role>=<name>;<option>=<value>). -->
   <rect x="6" y="6" width="108" height="138" rx="8" fill="#d1d5db" stroke="#4b5563" stroke-width="2" inkscape:label="plate"/>
   <circle cx="60" cy="58" r="40" fill="#6b7280" stroke="#374151" stroke-width="3" inkscape:label="bezel"/>

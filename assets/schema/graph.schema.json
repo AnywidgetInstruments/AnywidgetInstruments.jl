@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/graph.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/graph.schema.json",
   "title": "GraphWidget",
   "description": "Features shared by every graph: cursors, annotations, zoom and export (CHART-104 .. CHART-107).",
   "type": "object",
@@ -8,7 +8,7 @@
   "x-awi-class": "GraphWidget",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {
@@ -59,7 +59,7 @@
           "values": {
             "type": "array",
             "items": {
-              "$ref": "instrument.schema.json#/$defs/float"
+              "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float"
             },
             "description": "Value of each trace or line under the cursor."
           }

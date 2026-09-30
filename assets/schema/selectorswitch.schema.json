@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/selectorswitch.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/selectorswitch.schema.json",
   "title": "SelectorSwitch",
   "description": "Rotary selector with 2 to 5 labelled positions, optionally a key switch (IND-010 .. IND-013).",
   "type": "object",
   "x-awi-class": "SelectorSwitch",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {

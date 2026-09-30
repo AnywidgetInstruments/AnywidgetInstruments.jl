@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/rockerswitch.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/rockerswitch.schema.json",
   "title": "RockerSwitch",
   "description": "Rocker switch with I/O marks (BOOL-004).",
   "type": "object",

@@ -10,7 +10,7 @@ JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 
 [sources]
-Anywidget = {rev = "main", url = "https://github.com/s-celles/Anywidget.jl"}
+Anywidget = {rev = "main", url = "https://github.com/AnywidgetInstruments/Anywidget.jl"}
 
 [compat]
 Anywidget = "0.0.1"

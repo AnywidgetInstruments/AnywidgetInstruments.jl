@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://s-celles.github.io/anywidget-instruments/schema/pidfaceplate.schema.json",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-industrial/schema/pidfaceplate.schema.json",
   "title": "PIDFaceplate",
   "description": "Operator faceplate of a control loop (IND-030 .. IND-034).",
   "type": "object",
   "x-awi-class": "PIDFaceplate",
   "allOf": [
     {
-      "$ref": "instrument.schema.json"
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json"
     }
   ],
   "properties": {
@@ -47,7 +47,7 @@
       "description": "printf-like spec of the values (NUM-004)."
     },
     "pv": {
-      "$ref": "instrument.schema.json#/$defs/float",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float",
       "default": "nan",
       "x-awi-writer": "host",
       "description": "Process value (measurement), set by the host."
@@ -103,13 +103,13 @@
       "description": "Upper end of the PV scale."
     },
     "sp_min": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host",
       "description": "Lower setpoint limit; null: pv_min."
     },
     "sp_max": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host",
       "description": "Upper setpoint limit; null: pv_max."
@@ -127,7 +127,7 @@
       "description": "Upper output limit."
     },
     "confirm_delta": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host",
       "description": "A change of SP or OP larger than this needs a confirmation (IND-032); null: never."
@@ -139,25 +139,25 @@
       "description": "Leaving MAN sets SP to PV (bumpless transfer, IND-034)."
     },
     "lolo": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host",
       "description": "Low-low alarm limit on PV."
     },
     "lo": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host",
       "description": "Low alarm limit on PV."
     },
     "hi": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host",
       "description": "High alarm limit on PV."
     },
     "hihi": {
-      "$ref": "instrument.schema.json#/$defs/optionalNumber",
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/optionalNumber",
       "default": null,
       "x-awi-writer": "host",
       "description": "High-high alarm limit on PV."
@@ -191,7 +191,7 @@
       "description": "Summary {pv, sp, op, mode}. Derived: by the host when it owns the state, otherwise by the front end.",
       "properties": {
         "pv": {
-          "$ref": "instrument.schema.json#/$defs/float"
+          "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/$defs/float"
         },
         "sp": {
           "type": "number"
