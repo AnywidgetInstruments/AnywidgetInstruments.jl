@@ -39,14 +39,6 @@ jobs:
         with:
           version: ${{ matrix.version }}
       - uses: julia-actions/cache@v3
-      - name: Access Anywidget.jl (unregistered; private until published)
-        shell: bash
-        env:
-          TOKEN: ${{ secrets.ANYWIDGET_TOKEN }}
-        run: |
-          if [ -n "$TOKEN" ]; then
-            git config --global url."https://x-access-token:${TOKEN}@github.com/AnywidgetInstruments/Anywidget.jl".insteadOf "https://github.com/AnywidgetInstruments/Anywidget.jl"
-          fi
       - name: Add Anywidget.jl on Julia 1.10 (which ignores [sources])
         if: matrix.version == '1.10'
         run: julia --color=yes --project -e 'using Pkg; Pkg.add(url = "https://github.com/AnywidgetInstruments/Anywidget.jl")'
@@ -69,14 +61,6 @@ jobs:
         with:
           version: "1"
       - uses: julia-actions/cache@v3
-      - name: Access Anywidget.jl (unregistered; private until published)
-        shell: bash
-        env:
-          TOKEN: ${{ secrets.ANYWIDGET_TOKEN }}
-        run: |
-          if [ -n "$TOKEN" ]; then
-            git config --global url."https://x-access-token:${TOKEN}@github.com/AnywidgetInstruments/Anywidget.jl".insteadOf "https://github.com/AnywidgetInstruments/Anywidget.jl"
-          fi
       - name: Extension tests
         run: |
           julia --color=yes --project=test/slate -e 'using Pkg; Pkg.instantiate()'

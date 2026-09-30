@@ -30,14 +30,6 @@ jobs:
         with:
           version: "1"
       - uses: julia-actions/cache@v3
-      - name: Access Anywidget.jl (unregistered; private until published)
-        shell: bash
-        env:
-          TOKEN: ${{ secrets.ANYWIDGET_TOKEN }}
-        run: |
-          if [ -n "$TOKEN" ]; then
-            git config --global url."https://x-access-token:${TOKEN}@github.com/AnywidgetInstruments/Anywidget.jl".insteadOf "https://github.com/AnywidgetInstruments/Anywidget.jl"
-          fi
       - name: Instantiate
         run: julia --color=yes --project=docs -e 'using Pkg; Pkg.instantiate()'
       - name: Build and deploy
