@@ -7,7 +7,7 @@ layout: home
 hero:
   name: AnywidgetInstruments.jl
   text: Instrumentation widgets for Julia
-  tagline: Knobs, gauges, tanks, LEDs, strip charts, alarms and supervisory objects, from the front end of anywidget-instruments. No Python, no Node.js.
+  tagline: Knobs, gauges, tanks, LEDs, strip charts, alarms and supervisory objects, from the front end of anywidget-instruments-industrial. No Python, no Node.js.
   actions:
     - theme: brand
       text: Getting started
@@ -17,12 +17,12 @@ hero:
       link: /widgets/
     - theme: alt
       text: View on GitHub
-      link: https://github.com/s-celles/AnywidgetInstruments.jl
+      link: https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl
 
 features:
   - icon: 🎛️
     title: 52 widgets
-    details: Every concrete widget of anywidget-instruments has a constructor, Tank(3.2; max = 4), documented from the trait contract.
+    details: Every concrete widget of anywidget-instruments-industrial has a constructor, Tank(3.2; max = 4), documented from the trait contract.
     link: /widgets/
   - icon: ✅
     title: Checked traits
@@ -50,10 +50,10 @@ features:
 ![Some widgets of AnywidgetInstruments.jl](assets/widgets.png)
 
 AnywidgetInstruments.jl is the Julia host of
-[anywidget-instruments](https://github.com/s-celles/anywidget-instruments),
+[anywidget-instruments-industrial](https://github.com/AnywidgetInstruments/anywidget-instruments-industrial),
 instrumentation widgets for computational notebooks built on
 [anywidget](https://anywidget.dev). The package ships the widgets' front-end
-module and their [trait contract](https://s-celles.github.io/anywidget-instruments/trait-contract/):
+module and their [trait contract](https://anywidgetinstruments.github.io/anywidget-instruments-industrial/trait-contract/):
 a widget is a class and a dictionary of traits checked against that contract.
 
 ```julia
@@ -67,8 +67,8 @@ html_page("station.html", gain, level, LED(true; label = "Run"))
 !!! warning "Visualization only"
     These widgets are for monitoring, teaching and prototyping. They are not a
     protection layer and never replace the safety functions of a process. See
-    the [safety notice](https://s-celles.github.io/anywidget-instruments/safety/)
-    of anywidget-instruments.
+    the [safety notice](https://anywidgetinstruments.github.io/anywidget-instruments-industrial/safety/)
+    of anywidget-instruments-industrial.
 
 
 <!-- Source: getting-started.md -->
@@ -79,12 +79,12 @@ html_page("station.html", gain, level, LED(true; label = "Run"))
 
 ```julia
 using Pkg
-Pkg.add(url = "https://github.com/s-celles/Anywidget.jl")   # until both are registered
-Pkg.add(url = "https://github.com/s-celles/AnywidgetInstruments.jl")
+Pkg.add(url = "https://github.com/AnywidgetInstruments/Anywidget.jl")   # until both are registered
+Pkg.add(url = "https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl")
 ```
 
 The package runs on Julia 1.10 (LTS) and later, and is tested on 1.13. It needs neither Python nor
-Node.js: the front end of anywidget-instruments is shipped with it
+Node.js: the front end of anywidget-instruments-industrial is shipped with it
 (`AnywidgetInstruments.assets_dir()`), and `assets/SOURCE.toml` records the
 version and the checksum of the wheel it comes from.
 
@@ -95,7 +95,7 @@ frontend_version()
 
 ## Building widgets
 
-Each widget class of anywidget-instruments has a constructor of the same name.
+Each widget class of anywidget-instruments-industrial has a constructor of the same name.
 Traits are keyword arguments; a widget with a writable `value` also takes it as
 the first argument:
 
@@ -166,7 +166,7 @@ merge_traits(Dict("_kind" => "tank", "value" => 1.0); value = 2.5, label = "T-10
 
 ## Displaying widgets
 
-Widgets are hosted by [Anywidget.jl](https://github.com/s-celles/Anywidget.jl):
+Widgets are hosted by [Anywidget.jl](https://github.com/AnywidgetInstruments/Anywidget.jl):
 an [`Instrument`](@ref) is an `Anywidget.AbstractAnywidget`. Its `text/html`
 representation runs the front-end module in the page with a model holding its
 traits. It displays wherever HTML is shown:
@@ -199,7 +199,7 @@ html_page("station.html", Tank(3.2; max = 4), Knob(2.5), LED(true); title = "Sta
 
 These widgets run live on this page: drag the knob, press the buttons. The
 behaviour of each widget is specified by
-[anywidget-instruments](https://s-celles.github.io/anywidget-instruments/widgets/);
+[anywidget-instruments-industrial](https://anywidgetinstruments.github.io/anywidget-instruments-industrial/widgets/);
 the traits of each class are listed in the [API reference](api.md#Widget-constructors).
 
 ```@setup gallery
@@ -268,14 +268,14 @@ Markdown.parse(join(rows, "\n"))
 
 [Kaimon Slate](https://github.com/kahliburke/KaimonSlate.jl) is a reactive
 Julia notebook. Its SlateAFM extension hosts anywidget front-end modules; with
-SlateExtensionsBase loaded, [Anywidget.jl](https://github.com/s-celles/Anywidget.jl)
+SlateExtensionsBase loaded, [Anywidget.jl](https://github.com/AnywidgetInstruments/Anywidget.jl)
 plugs into it through a package extension, and every widget of
 AnywidgetInstruments.jl with it:
 
 - `@bind name Tank(...)` binds `name` to the widget's trait dictionary,
   rendered by SlateAFM's host shim (kind `SlateAFM.AFM`);
 - the front end is served from the package, under
-  `/ext-assets/Anywidget.anywidget-instruments/`;
+  `/ext-assets/Anywidget.anywidget-instruments-industrial/`;
 - `send_message` goes through `SlateAFM.afm_emit`.
 
 The integration needs Julia 1.12 or later, a requirement of SlateExtensionsBase (tested on 1.13).
@@ -288,8 +288,8 @@ environment with AnywidgetInstruments.jl:
 ```julia
 using Pkg
 Pkg.add(url = "https://github.com/kahliburke/KaimonSlate.jl", subdir = "examples/extensions/SlateAFM")
-Pkg.add(url = "https://github.com/s-celles/Anywidget.jl")
-Pkg.add(url = "https://github.com/s-celles/AnywidgetInstruments.jl")
+Pkg.add(url = "https://github.com/AnywidgetInstruments/Anywidget.jl")
+Pkg.add(url = "https://github.com/AnywidgetInstruments/AnywidgetInstruments.jl")
 ```
 
 Then, in the notebook:
@@ -412,7 +412,7 @@ one widget of the session. Without heartbeats, the widgets never show
 
 Some rules are implemented by the Python kernel, the TypeScript front end and
 this package. The three are checked against the same parity cases
-(`tests/parity/*.json` of anywidget-instruments, copied into `test/parity/`).
+(`tests/parity/*.json` of anywidget-instruments-industrial, copied into `test/parity/`).
 
 ## Alarm levels
 
@@ -455,6 +455,36 @@ labels = normalize_value_labels([Dict("value" => 2, "label" => "HIGH"), Dict("va
 value_label_of(labels, 2, 0, 2), value_of_label(labels, " off ")
 ```
 
+## Peaks and bar graphs
+
+- [`next_peak`](@ref): the peak a gauge holds (NUM-110), taken at once when
+  higher, released after `decay` seconds.
+- [`normalize_bars`](@ref), [`bar_levels`](@ref): the bars of a `BarGraph` as
+  the kernel stores them and their alarm levels (IND-102).
+
+## Supervisory objects
+
+A host that owns the state of these widgets applies the operator actions the
+front end sends as messages with the same rules as the Python kernel:
+
+- [`normalize_machine`](@ref), [`next_state`](@ref),
+  [`available_commands`](@ref): state machine models and commands (IND-060 ..
+  IND-065), presets included.
+- [`operator_set`](@ref), [`loop_mode_change`](@ref), [`sp_limits`](@ref):
+  the operator rules of a `PIDFaceplate` (IND-030 .. IND-034).
+- [`AnnunciatorPanel`](@ref), [`annunciator_transition`](@ref),
+  [`annunciator_set`](@ref), [`annunciator_action`](@ref), [`horn_on`](@ref):
+  ISA-18.1 sequences A, M and R, first out and horn (IND-040 .. IND-043).
+- [`acknowledge_rows`](@ref), [`shelve_row`](@ref), [`unshelve_row`](@ref),
+  [`expire_shelving`](@ref), [`keep_row`](@ref): the alarm banner and the alarm
+  list (SCADA-006, SCADA-007, IND-050 .. IND-053).
+
+```@example rules
+m = normalize_machine(Dict("states" => [Dict("name" => "Off"), Dict("name" => "On")],
+                           "transitions" => [["Off", "Start", "On"], ["On", "Stop", "Off"]]))
+next_state(m, "Off", "Start"), available_commands(m, "On")
+```
+
 
 <!-- Source: api.md -->
 
@@ -469,7 +499,7 @@ Filter = f -> !(nameof(f) in Symbol.(widget_classes()))
 
 ## Widget constructors
 
-One constructor per concrete class of anywidget-instruments, generated from
+One constructor per concrete class of anywidget-instruments-industrial, generated from
 the trait contract. `Pipe` is not exported (Base exports a `Pipe` type): call
 it `AnywidgetInstruments.Pipe`.
 
@@ -489,9 +519,9 @@ and prioritized with MoSCoW: **M**ust, **S**hould, **C**ould, **W**on't (this
 time).
 
 The widgets themselves (their traits, messages and behaviour) are specified by
-the [anywidget-instruments specification](https://s-celles.github.io/anywidget-instruments/specification/);
+the [anywidget-instruments specification](https://anywidgetinstruments.github.io/anywidget-instruments-industrial/specification/);
 this package is a Julia host of their front end, following its
-[trait contract for host authors](https://s-celles.github.io/anywidget-instruments/trait-contract/)
+[trait contract for host authors](https://anywidgetinstruments.github.io/anywidget-instruments-industrial/trait-contract/)
 (HOST-001 to HOST-012). Requirement IDs of that specification are quoted in
 parentheses where they apply.
 
@@ -500,6 +530,8 @@ parentheses where they apply.
 | 0.1 | 2026-09-25 | First version (phase 0, package 0.0.1) |
 | 0.2 | 2026-09-25 | Hosting moved to Anywidget.jl: sections 7 and 8 replaced by the host requirements (package 0.0.2) |
 | 0.3 | 2026-09-25 | Weekly refresh of the front end (JL-GEN-007); "Out of scope" becomes "Planned" |
+| 0.4 | 2026-09-30 | The front end comes from anywidget-instruments-industrial (renamed), built on the anywidget-instruments core: JL-GEN-003 (base schema of the core vendored too), JL-GEN-006 (both license notices), JL-GEN-007, JL-SLATE-001 (served under `Anywidget.anywidget-instruments-industrial`) |
+| 0.5 | 2026-09-30 | JL-LOG-005 .. JL-LOG-010: Julia ports of the peak hold, bar graph, state machine, PID faceplate, annunciator and alarm banner and list rules, with their parity cases (phase 2, package 0.0.3) |
 
 ## 1. General
 
@@ -507,11 +539,11 @@ parentheses where they apply.
 |---|---|---|
 | JL-GEN-001 | M | The package shall run on the current Julia release (1.13) and on the LTS release (1.10). |
 | JL-GEN-002 | M | The package shall not require Python, pip, Node.js or network access at run time. |
-| JL-GEN-003 | M | The package shall ship the front-end module (`index.js`), its styles (`index.css`), the flattened trait contract (`contract.json`) and the JSON Schemas of anywidget-instruments, unmodified except for the removed source map comment. |
+| JL-GEN-003 | M | The package shall ship the front-end module (`index.js`), its styles (`index.css`), the flattened trait contract (`contract.json`) and the JSON Schemas of anywidget-instruments-industrial, with the base schema of the anywidget-instruments core they extend, unmodified except for the removed source map comment. |
 | JL-GEN-004 | M | The package shall record the version and the SHA-256 checksum of the wheel its front end was taken from (`assets/SOURCE.toml`). |
 | JL-GEN-005 | M | The package shall depend only on Anywidget.jl, JSON.jl and standard libraries. |
-| JL-GEN-006 | S | The package shall keep the license notice of anywidget-instruments next to the vendored files. |
-| JL-GEN-007 | S | The repository shall refresh the vendored front end and the parity cases of anywidget-instruments weekly, as a pull request when they change. |
+| JL-GEN-006 | S | The package shall keep the license notices of anywidget-instruments-industrial and of the anywidget-instruments core next to the vendored files. |
+| JL-GEN-007 | S | The repository shall refresh the vendored front end and the parity cases of anywidget-instruments-industrial weekly, as a pull request when they change. |
 
 ## 2. Contract
 
@@ -571,10 +603,16 @@ parentheses where they apply.
 | JL-LOG-002 | M | The package shall coerce values and check scales like the front end (`coerce_value`, `valid_scale`, NUM-006, NUM-010), and pass the shared cases of `tests/parity/numeric.json`. |
 | JL-LOG-003 | S | The package shall normalize value labels and look them up like the front end (`normalize_value_labels`, `value_label_of`, `value_of_label`, IND-118), and pass the shared cases of `tests/parity/value_labels.json`. |
 | JL-LOG-004 | S | When the host owns the state (non-empty `_session`), the package shall update `alarm_level` whenever the value or the limits of a widget with an `alarm_level` trait change (HOST-004). |
+| JL-LOG-005 | S | The package shall hold peaks like the front end (`next_peak`, NUM-110), and pass the shared cases of `tests/parity/peak.json`. |
+| JL-LOG-006 | S | The package shall normalize the bars of a bar graph and compute their alarm levels like the front end (`normalize_bars`, `bar_levels`, IND-102), and pass the shared cases of `tests/parity/bars.json`. |
+| JL-LOG-007 | S | The package shall check state machine models and apply operator commands like the front end (`normalize_machine`, `next_state`, `available_commands`, IND-060 .. IND-065), and pass the shared cases of `tests/parity/statemachine.json`. |
+| JL-LOG-008 | S | The package shall apply the operator rules of the PID faceplate like the front end (`operator_set`, `loop_mode_change`, IND-030 .. IND-034), and pass the shared cases of `tests/parity/pid.json`. |
+| JL-LOG-009 | S | The package shall apply the annunciator sequences A, M and R, the first-out mark and the horn like the front end (`annunciator_transition`, `annunciator_set`, `annunciator_action`, `horn_on`, IND-040 .. IND-043), and pass the shared cases of `tests/parity/annunciator.json`. |
+| JL-LOG-010 | S | The package shall apply the operator actions of the alarm banner and alarm list like the front end (`acknowledge_rows`, `shelve_row`, `unshelve_row`, `expire_shelving`, SCADA-006, SCADA-007, IND-050 .. IND-053), and pass the shared cases of `tests/parity/alarms.json`. |
 
 ## 7. Hosts
 
-Widgets are hosted by [Anywidget.jl](https://github.com/s-celles/Anywidget.jl),
+Widgets are hosted by [Anywidget.jl](https://github.com/AnywidgetInstruments/Anywidget.jl),
 which specifies the standalone HTML display and the Kaimon Slate integration
 (AW-HTML-\*, AW-SLATE-\*).
 
@@ -585,7 +623,7 @@ which specifies the standalone HTML display and the Kaimon Slate integration
 | JL-HTML-001 | M | A widget shall display as standalone HTML with its traits, defaults filled in, escaped inside their script element. |
 | JL-HTML-002 | M | By default, the HTML of a widget shall be self-contained (the vendored front end inlined). |
 | JL-HTML-003 | S | Where the asset base URL of `frontend_module()` is set, the HTML shall load the front end from it; `html_page` shall include it once. |
-| JL-SLATE-001 | M | In Kaimon Slate, a widget shall bind to its trait dictionary, with the vendored front end served under `/ext-assets/Anywidget.anywidget-instruments/`. |
+| JL-SLATE-001 | M | In Kaimon Slate, a widget shall bind to its trait dictionary, with the vendored front end served under `/ext-assets/Anywidget.anywidget-instruments-industrial/`. |
 
 ## 9. Quality
 
@@ -601,8 +639,8 @@ which specifies the standalone HTML display and the Kaimon Slate integration
 Not yet specified as requirements; see the [roadmap](roadmap.md) for the phases.
 
 - Bidirectional hosts (Bonito.jl, Pluto.jl, IJulia), provided by Anywidget.jl.
-- Julia ports of the other shared rules (annunciator sequences, state machine
-  transitions, PID faceplate, …), one parity file at a time.
+- Julia ports of the remaining shared rules (process object commands, trend,
+  waveform, intensity and digital graphs, …), one parity file at a time.
 
 
 <!-- Source: roadmap.md -->
@@ -614,7 +652,7 @@ they are not releases.
 
 ## Phase 0 — `0.0.1`: foundations (done)
 
-- Vendored front end and trait contract of anywidget-instruments, with their
+- Vendored front end and trait contract of anywidget-instruments-industrial, with their
   origin and checksum.
 - A constructor per widget class; traits checked against the contract.
 - JSON encoding (non-finite numbers, bytes), binary buffers.
@@ -635,12 +673,13 @@ they are not releases.
 ## Phase 2 — `0.0.3`: more shared rules
 
 - Julia ports of the other parity files: annunciator sequences, state machine
-  transitions, PID faceplate, alarm list and banner, bar graphs, peak hold.
+  transitions, PID faceplate, alarm list and banner, bar graphs, peak hold
+  (done, JL-LOG-005 .. JL-LOG-010).
 - Message builders for `WaveformChart`, `IntensityChart`, `XYGraph` and the
   digital graphs.
 
 ## Phase 3 — `0.0.4`: tooling
 
 - Registration in the General registry.
-- Automated refresh of the vendored front end when anywidget-instruments is
+- Automated refresh of the vendored front end when anywidget-instruments-industrial is
   released (a workflow opening a pull request).

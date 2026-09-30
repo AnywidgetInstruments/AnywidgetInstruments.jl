@@ -1,4 +1,4 @@
-/* js/src/styles.css */
+/* node_modules/anywidget-instruments/js/src/styles.css */
 .awi-root {
   --awi-fg: #1f2937;
   --awi-muted: #6b7280;
@@ -257,6 +257,59 @@
   display: block;
   overflow: visible;
 }
+.awi-root.awi-control .awi-body {
+  cursor: grab;
+}
+.awi-root.awi-control.awi-dragging .awi-body {
+  cursor: grabbing;
+}
+.awi-root.awi-indicator .awi-body {
+  cursor: default;
+}
+.awi-root.awi-disabled {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+.awi-root.awi-disabled .awi-body {
+  cursor: not-allowed;
+}
+.awi-root {
+  position: relative;
+}
+.awi-root.awi-stale .awi-body {
+  opacity: 0.55;
+  cursor: not-allowed !important;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 6px,
+      rgba(128, 128, 128, 0.25) 6px 8px);
+}
+.awi-root .awi-stale-badge {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: #1f2937;
+  background: #fde68a;
+  border: 1px solid #b45309;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .awi-root *,
+  .awi-root {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* js/src/styles.css */
 .awi-root.awi-meter .awi-svg {
   overflow: hidden;
   border-radius: 6px;
@@ -374,22 +427,6 @@
   border-radius: 3px;
   border: 1px solid currentColor;
 }
-.awi-root.awi-control .awi-body {
-  cursor: grab;
-}
-.awi-root.awi-control.awi-dragging .awi-body {
-  cursor: grabbing;
-}
-.awi-root.awi-indicator .awi-body {
-  cursor: default;
-}
-.awi-root.awi-disabled {
-  opacity: 0.45;
-  filter: grayscale(1);
-}
-.awi-root.awi-disabled .awi-body {
-  cursor: not-allowed;
-}
 .awi-root.awi-alarm-lo .awi-value-row {
   color: var(--awi-alarm-lo);
 }
@@ -421,34 +458,6 @@
 .awi-root .awi-zone-hihi {
   fill: var(--awi-alarm-hihi);
   opacity: 0.7;
-}
-.awi-root {
-  position: relative;
-}
-.awi-root.awi-stale .awi-body {
-  opacity: 0.55;
-  cursor: not-allowed !important;
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      transparent 0 6px,
-      rgba(128, 128, 128, 0.25) 6px 8px);
-}
-.awi-root .awi-stale-badge {
-  position: absolute;
-  top: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  white-space: nowrap;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 3px;
-  color: #1f2937;
-  background: #fde68a;
-  border: 1px solid #b45309;
-  pointer-events: none;
 }
 .awi-root .awi-face {
   fill: var(--awi-face);
@@ -1738,11 +1747,6 @@
   border-style: dashed;
 }
 @media (prefers-reduced-motion: reduce) {
-  .awi-root *,
-  .awi-root {
-    animation: none !important;
-    transition: none !important;
-  }
   .awi-root.awi-blink .awi-led {
     stroke: var(--awi-fg);
     stroke-width: 3;

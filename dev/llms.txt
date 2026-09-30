@@ -1,7 +1,7 @@
 # AnywidgetInstruments.jl
 
 > Instrumentation widgets (knobs, gauges, tanks, LEDs, strip charts, alarms, supervisory objects)
-> for Julia: the front end of anywidget-instruments with its trait contract, displayed as standalone
+> for Julia: the front end of anywidget-instruments-industrial with its trait contract, displayed as standalone
 > HTML or in Kaimon Slate notebooks. No Python, no Node.js.
 
 - [Home](./)

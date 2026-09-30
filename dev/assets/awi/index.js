@@ -1,5 +1,138 @@
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+
 // js/src/generated/contract.ts
 var CONTRACTS = {
+  "Instrument": {
+    "className": "InstrumentWidget",
+    "kind": "",
+    "abstract": true,
+    "traits": {
+      "_kind": {
+        "type": "string",
+        "default": "",
+        "writer": "host",
+        "description": "Front-end renderer identifier; each widget schema fixes it with a const."
+      },
+      "mode": {
+        "type": "enum",
+        "values": [
+          "control",
+          "indicator"
+        ],
+        "default": "control",
+        "writer": "host",
+        "description": '"control": the user sets the value; "indicator": display only.'
+      },
+      "label": {
+        "type": "string",
+        "default": "",
+        "writer": "host",
+        "description": "Plain text, never interpreted as HTML (SEC-002)."
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "writer": "host",
+        "description": "Greyed out, input rejected."
+      },
+      "visible": {
+        "type": "boolean",
+        "default": true,
+        "writer": "host"
+      },
+      "tooltip": {
+        "type": "string",
+        "default": "",
+        "writer": "host",
+        "description": "Plain text shown on hover."
+      },
+      "size": {
+        "type": "array",
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          }
+        ],
+        "default": [
+          160,
+          160
+        ],
+        "writer": "host",
+        "description": "[width, height] in CSS pixels."
+      },
+      "style": {
+        "type": "enum",
+        "values": [
+          "modern",
+          "classic",
+          "system"
+        ],
+        "default": "modern",
+        "writer": "host"
+      },
+      "theme": {
+        "type": "enum",
+        "values": [
+          "auto",
+          "light",
+          "dark",
+          "system"
+        ],
+        "default": "auto",
+        "writer": "host",
+        "description": '"auto": the style decides; "system": the host page or the operating system (STYLE-007).'
+      },
+      "skin": {
+        "type": "object",
+        "keys": [
+          "background",
+          "housing",
+          "knob",
+          "needle"
+        ],
+        "default": {},
+        "writer": "host",
+        "description": "Replaceable drawing parts: part name -> SVG source, sanitized (STYLE-005, STYLE-006)."
+      },
+      "_session": {
+        "type": "string",
+        "default": "",
+        "writer": "host",
+        "description": "Identity of the host session that owns the state. Non-empty: the host is authoritative for derived traits and may announce heartbeats (HOST-003, HOST-004). Empty (default): the front end computes derived traits itself."
+      },
+      "_heartbeat": {
+        "type": "number",
+        "minimum": 0,
+        "default": 0,
+        "writer": "host",
+        "description": 'Heartbeat period announced by the host, in seconds. 0 (default): no stale-data detection. With a non-empty _session and a period > 0, the host sends {"type": "hb", "session": _session} every period (ROB-001, HOST-003).'
+      }
+    },
+    "messages": [
+      {
+        "type": "hb",
+        "direction": "host-to-front",
+        "description": "Heartbeat, sent every _heartbeat seconds when the host announces liveness.",
+        "fields": {
+          "session": {
+            "type": "string"
+          },
+          "interval": {
+            "type": "number"
+          }
+        },
+        "buffers": []
+      }
+    ]
+  },
   "AlarmBanner": {
     "className": "AlarmBanner",
     "kind": "alarmbanner",
@@ -4411,135 +4544,6 @@ var CONTRACTS = {
         "type": "string",
         "default": "",
         "writer": "host"
-      }
-    },
-    "messages": [
-      {
-        "type": "hb",
-        "direction": "host-to-front",
-        "description": "Heartbeat, sent every _heartbeat seconds when the host announces liveness.",
-        "fields": {
-          "session": {
-            "type": "string"
-          },
-          "interval": {
-            "type": "number"
-          }
-        },
-        "buffers": []
-      }
-    ]
-  },
-  "Instrument": {
-    "className": "InstrumentWidget",
-    "kind": "",
-    "abstract": true,
-    "traits": {
-      "_kind": {
-        "type": "string",
-        "default": "",
-        "writer": "host",
-        "description": "Front-end renderer identifier; each widget schema fixes it with a const."
-      },
-      "mode": {
-        "type": "enum",
-        "values": [
-          "control",
-          "indicator"
-        ],
-        "default": "control",
-        "writer": "host",
-        "description": '"control": the user sets the value; "indicator": display only.'
-      },
-      "label": {
-        "type": "string",
-        "default": "",
-        "writer": "host",
-        "description": "Plain text, never interpreted as HTML (SEC-002)."
-      },
-      "disabled": {
-        "type": "boolean",
-        "default": false,
-        "writer": "host",
-        "description": "Greyed out, input rejected."
-      },
-      "visible": {
-        "type": "boolean",
-        "default": true,
-        "writer": "host"
-      },
-      "tooltip": {
-        "type": "string",
-        "default": "",
-        "writer": "host",
-        "description": "Plain text shown on hover."
-      },
-      "size": {
-        "type": "array",
-        "minItems": 2,
-        "prefixItems": [
-          {
-            "type": "integer",
-            "exclusiveMinimum": 0
-          },
-          {
-            "type": "integer",
-            "exclusiveMinimum": 0
-          }
-        ],
-        "default": [
-          160,
-          160
-        ],
-        "writer": "host",
-        "description": "[width, height] in CSS pixels."
-      },
-      "style": {
-        "type": "enum",
-        "values": [
-          "modern",
-          "classic",
-          "system"
-        ],
-        "default": "modern",
-        "writer": "host"
-      },
-      "theme": {
-        "type": "enum",
-        "values": [
-          "auto",
-          "light",
-          "dark",
-          "system"
-        ],
-        "default": "auto",
-        "writer": "host",
-        "description": '"auto": the style decides; "system": the host page or the operating system (STYLE-007).'
-      },
-      "skin": {
-        "type": "object",
-        "keys": [
-          "background",
-          "housing",
-          "knob",
-          "needle"
-        ],
-        "default": {},
-        "writer": "host",
-        "description": "Replaceable drawing parts: part name -> SVG source, sanitized (STYLE-005, STYLE-006)."
-      },
-      "_session": {
-        "type": "string",
-        "default": "",
-        "writer": "host",
-        "description": "Identity of the host session that owns the state. Non-empty: the host is authoritative for derived traits and may announce heartbeats (HOST-003, HOST-004). Empty (default): the front end computes derived traits itself."
-      },
-      "_heartbeat": {
-        "type": "number",
-        "minimum": 0,
-        "default": 0,
-        "writer": "host",
-        "description": 'Heartbeat period announced by the host, in seconds. 0 (default): no stale-data detection. With a non-empty _session and a period > 0, the host sends {"type": "hb", "session": _session} every period (ROB-001, HOST-003).'
       }
     },
     "messages": [
@@ -16976,7 +16980,7 @@ function barLevels(values, bars, deadband, previous) {
   });
 }
 
-// js/src/core/scale.ts
+// node_modules/anywidget-instruments/js/src/core/scale.ts
 function parseNumber(v) {
   if (typeof v === "number") return v;
   if (v === null || v === void 0) return NaN;
@@ -17163,7 +17167,7 @@ var ScaleGuard = class {
     }
     if (!this.warned) {
       this.warned = true;
-      console.warn(`anywidget-instruments: ${where}: invalid scale (min ${s.min}, max ${s.max}, ${s.scale}); keeping min ${this.last.min}, max ${this.last.max}`);
+      console.warn(`anywidget-instruments-industrial: ${where}: invalid scale (min ${s.min}, max ${s.max}, ${s.scale}); keeping min ${this.last.min}, max ${this.last.max}`);
     }
     return this.last;
   }
@@ -17319,9 +17323,34 @@ function resolveState(machine, value) {
   return typeof value === "string" && machine.states.some((s) => s.name === value) ? value : machine.initial;
 }
 
-// js/src/contract/traits.ts
+// node_modules/anywidget-instruments/js/src/contract/traits.ts
 var NONFINITE = /* @__PURE__ */ new Set(["nan", "inf", "-inf", "NaN", "Infinity", "-Infinity"]);
-var isPlainObject = (v) => typeof v === "object" && v !== null && !Array.isArray(v);
+var isPlainObject = (v) => typeof v === "object" && v !== null && !Array.isArray(v) && !(v instanceof Map) && !(v instanceof ArrayBuffer) && !ArrayBuffer.isView(v);
+function plainValue(raw) {
+  if (raw instanceof Map) {
+    return Object.fromEntries(Array.from(raw, ([k, v]) => [String(k), plainValue(v)]));
+  }
+  if (Array.isArray(raw)) {
+    let out;
+    for (let i = 0; i < raw.length; i++) {
+      const item = raw[i];
+      if (typeof item !== "object" || item === null) continue;
+      const read = plainValue(item);
+      if (read !== item) (out ?? (out = raw.slice()))[i] = read;
+    }
+    return out ?? raw;
+  }
+  if (isPlainObject(raw)) {
+    let out;
+    for (const [k, v] of Object.entries(raw)) {
+      if (typeof v !== "object" || v === null) continue;
+      const read = plainValue(v);
+      if (read !== v) (out ?? (out = { ...raw }))[k] = read;
+    }
+    return out ?? raw;
+  }
+  return raw;
+}
 function readNumber(spec, raw) {
   let v;
   if (typeof raw === "number") v = raw;
@@ -17348,6 +17377,7 @@ function readBytes(raw) {
 }
 function readValue(spec, raw) {
   if (raw === null) return spec.nullable ? null : void 0;
+  raw = plainValue(raw);
   switch (spec.type) {
     case "number":
     case "integer":
@@ -17515,7 +17545,7 @@ function attachBarLevels(model, contract) {
   };
 }
 function machineOf(model, contract) {
-  return normalizeMachine(model.get("machine")) ?? normalizeMachine(contract.traits.machine.default);
+  return normalizeMachine(plainValue(model.get("machine"))) ?? normalizeMachine(contract.traits.machine.default);
 }
 function attachStateMachine(model, contract) {
   const inputs = ["machine", "value", "_session"];
@@ -17705,7 +17735,7 @@ function attachDerived(model, { clock = monotonic } = {}) {
   return () => cleanups.forEach((c) => c());
 }
 
-// js/src/core/liveness.ts
+// node_modules/anywidget-instruments/js/src/core/liveness.ts
 var scope = globalThis;
 var REG = scope.__awiLiveness || (scope.__awiLiveness = { beats: {} });
 function recordBeat(session, now = Date.now()) {
@@ -17734,7 +17764,7 @@ function watchModel(model) {
   model.on("comm_live_update", () => markDead(model.get("_session")));
 }
 
-// js/src/core/dom.ts
+// node_modules/anywidget-instruments/js/src/core/dom.ts
 var SVG_NS = "http://www.w3.org/2000/svg";
 function svg(tag, attrs = {}, children = []) {
   const node = document.createElementNS(SVG_NS, tag);
@@ -17800,7 +17830,7 @@ function parseSkin(source) {
   return document.importNode(root, true);
 }
 
-// js/src/core/pagetheme.ts
+// node_modules/anywidget-instruments/js/src/core/pagetheme.ts
 var DARK_HOST = '[data-jp-theme-light="false"], .vscode-dark, .vscode-high-contrast, [data-theme="dark"], .dark-mode, .dark-theme';
 var LIGHT_HOST = '[data-jp-theme-light="true"], .vscode-light, [data-theme="light"], .light-theme';
 var osDark = () => typeof matchMedia !== "undefined" && matchMedia("(prefers-color-scheme: dark)").matches;
@@ -17828,7 +17858,7 @@ function applyPageTheme(doc, theme) {
   return true;
 }
 
-// js/src/core/view.ts
+// node_modules/anywidget-instruments/js/src/core/view.ts
 var COMMON_TRAITS = ["mode", "label", "disabled", "visible", "tooltip", "size", "style", "theme", "skin", "_heartbeat"];
 var OFFSCREEN_MS = 100;
 var STALE_TEXT = {
@@ -17836,6 +17866,13 @@ var STALE_TEXT = {
   stale: "⚠ STALE — kernel lost",
   nokernel: "⚠ NO KERNEL — read-only"
 };
+var CONTRACTS_BY_KIND = /* @__PURE__ */ new Map();
+function registerContracts(byKind) {
+  for (const [kind, contract] of Object.entries(byKind)) CONTRACTS_BY_KIND.set(kind, contract);
+}
+function contractOf2(kind) {
+  return CONTRACTS_BY_KIND.get(kind);
+}
 var uid = 0;
 var prefix = `awi${Math.random().toString(36).slice(2, 8)}`;
 var BaseView = class {
@@ -17845,14 +17882,34 @@ var BaseView = class {
    * @param traits widget-specific traits triggering a redraw
    */
   constructor(model, el, traits = []) {
-    this._invalid = /* @__PURE__ */ new Set();
+    __publicField(this, "model");
+    __publicField(this, "el");
+    __publicField(this, "id");
+    __publicField(this, "kind");
+    /** Trait contract of the widget, when its `_kind` has a schema (HOST-001). */
+    __publicField(this, "contract");
+    __publicField(this, "_invalid", /* @__PURE__ */ new Set());
     /** Last read of each trait: the value is read again only when the raw value changes. */
-    this._reads = /* @__PURE__ */ new Map();
+    __publicField(this, "_reads", /* @__PURE__ */ new Map());
+    __publicField(this, "root");
+    __publicField(this, "labelEl");
+    __publicField(this, "body");
+    __publicField(this, "staleBadge");
+    __publicField(this, "stale");
+    __publicField(this, "_frame");
+    __publicField(this, "_offscreen");
+    __publicField(this, "_dirty");
+    __publicField(this, "_inViewport");
+    __publicField(this, "_disposers");
+    __publicField(this, "_lastSend");
+    __publicField(this, "_pendingSend");
+    __publicField(this, "_pendingValue");
+    __publicField(this, "_since");
     this.model = model;
     this.el = el;
     this.id = `${prefix}-${++uid}`;
     this.kind = String(model.get("_kind") ?? "");
-    this.contract = BY_KIND[this.kind];
+    this.contract = contractOf2(this.kind);
     this._frame = 0;
     this._offscreen = 0;
     this._dirty = true;
@@ -17902,7 +17959,7 @@ var BaseView = class {
   get(name) {
     const raw = this.model.get(name);
     const spec = this.contract?.traits[name];
-    if (!spec) return raw;
+    if (!spec) return plainValue(raw);
     const last = this._reads.get(name);
     if (last && Object.is(last.raw, raw)) return last.value;
     const value = readTrait(spec, raw, () => {
@@ -24808,6 +24865,7 @@ var TrendView = class extends PlotView {
 };
 
 // js/src/index.js
+registerContracts(BY_KIND);
 var VIEWS2 = {
   knob: RotaryView,
   dial: RotaryView,
@@ -24865,7 +24923,7 @@ var VIEWS2 = {
 function render({ model, el }) {
   const View = VIEWS2[model.get("_kind")];
   if (!View) {
-    el.textContent = `anywidget-instruments: unknown widget kind "${model.get("_kind")}"`;
+    el.textContent = `anywidget-instruments-industrial: unknown widget kind "${model.get("_kind")}"`;
     return void 0;
   }
   const view = new View(model, el);
