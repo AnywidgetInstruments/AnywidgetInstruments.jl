@@ -43,7 +43,7 @@ jobs:
       - name: Remove the upstream checkout
         run: rm -rf .upstream
       - name: Open a pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: chore/sync-frontend-auto
           commit-message: |
