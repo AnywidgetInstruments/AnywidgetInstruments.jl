@@ -18,6 +18,7 @@ parentheses where they apply.
 | 0.2 | 2026-09-25 | Hosting moved to Anywidget.jl: sections 7 and 8 replaced by the host requirements (package 0.0.2) |
 | 0.3 | 2026-09-25 | Weekly refresh of the front end (JL-GEN-007); "Out of scope" becomes "Planned" |
 | 0.4 | 2026-09-30 | The front end comes from anywidget-instruments-industrial (renamed), built on the anywidget-instruments core: JL-GEN-003 (base schema of the core vendored too), JL-GEN-006 (both license notices), JL-GEN-007, JL-SLATE-001 (served under `Anywidget.anywidget-instruments-industrial`) |
+| 0.5 | 2026-09-30 | JL-LOG-005 .. JL-LOG-010: Julia ports of the peak hold, bar graph, state machine, PID faceplate, annunciator and alarm banner and list rules, with their parity cases (phase 2, package 0.0.3) |
 
 ## 1. General
 
@@ -89,6 +90,12 @@ parentheses where they apply.
 | JL-LOG-002 | M | The package shall coerce values and check scales like the front end (`coerce_value`, `valid_scale`, NUM-006, NUM-010), and pass the shared cases of `tests/parity/numeric.json`. |
 | JL-LOG-003 | S | The package shall normalize value labels and look them up like the front end (`normalize_value_labels`, `value_label_of`, `value_of_label`, IND-118), and pass the shared cases of `tests/parity/value_labels.json`. |
 | JL-LOG-004 | S | When the host owns the state (non-empty `_session`), the package shall update `alarm_level` whenever the value or the limits of a widget with an `alarm_level` trait change (HOST-004). |
+| JL-LOG-005 | S | The package shall hold peaks like the front end (`next_peak`, NUM-110), and pass the shared cases of `tests/parity/peak.json`. |
+| JL-LOG-006 | S | The package shall normalize the bars of a bar graph and compute their alarm levels like the front end (`normalize_bars`, `bar_levels`, IND-102), and pass the shared cases of `tests/parity/bars.json`. |
+| JL-LOG-007 | S | The package shall check state machine models and apply operator commands like the front end (`normalize_machine`, `next_state`, `available_commands`, IND-060 .. IND-065), and pass the shared cases of `tests/parity/statemachine.json`. |
+| JL-LOG-008 | S | The package shall apply the operator rules of the PID faceplate like the front end (`operator_set`, `loop_mode_change`, IND-030 .. IND-034), and pass the shared cases of `tests/parity/pid.json`. |
+| JL-LOG-009 | S | The package shall apply the annunciator sequences A, M and R, the first-out mark and the horn like the front end (`annunciator_transition`, `annunciator_set`, `annunciator_action`, `horn_on`, IND-040 .. IND-043), and pass the shared cases of `tests/parity/annunciator.json`. |
+| JL-LOG-010 | S | The package shall apply the operator actions of the alarm banner and alarm list like the front end (`acknowledge_rows`, `shelve_row`, `unshelve_row`, `expire_shelving`, SCADA-006, SCADA-007, IND-050 .. IND-053), and pass the shared cases of `tests/parity/alarms.json`. |
 
 ## 7. Hosts
 
@@ -119,5 +126,5 @@ which specifies the standalone HTML display and the Kaimon Slate integration
 Not yet specified as requirements; see the [roadmap](roadmap.md) for the phases.
 
 - Bidirectional hosts (Bonito.jl, Pluto.jl, IJulia), provided by Anywidget.jl.
-- Julia ports of the other shared rules (annunciator sequences, state machine
-  transitions, PID faceplate, …), one parity file at a time.
+- Julia ports of the remaining shared rules (process object commands, trend,
+  waveform, intensity and digital graphs, …), one parity file at a time.

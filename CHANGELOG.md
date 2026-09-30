@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Julia ports of more rules shared with the front end, checked against the
+  parity cases of anywidget-instruments-industrial: peak hold (`next_peak`),
+  bar graphs (`normalize_bars`, `bar_levels`), state machines
+  (`normalize_machine`, `next_state`, `available_commands`), PID faceplate
+  operator rules (`operator_set`, `loop_mode_change`), annunciator sequences
+  (`AnnunciatorPanel`, `annunciator_set`, `annunciator_action`, `horn_on`) and
+  the alarm banner and list (`acknowledge_rows`, `shelve_row`, `unshelve_row`,
+  `expire_shelving`) — JL-LOG-005 .. JL-LOG-010, specification 0.5.
+
 ### Changed
 
 - The repositories moved to the AnywidgetInstruments organization: links,

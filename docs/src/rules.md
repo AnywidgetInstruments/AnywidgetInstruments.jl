@@ -44,3 +44,33 @@ t[:alarm_level]
 labels = normalize_value_labels([Dict("value" => 2, "label" => "HIGH"), Dict("value" => 0, "label" => "OFF")])
 value_label_of(labels, 2, 0, 2), value_of_label(labels, " off ")
 ```
+
+## Peaks and bar graphs
+
+- [`next_peak`](@ref): the peak a gauge holds (NUM-110), taken at once when
+  higher, released after `decay` seconds.
+- [`normalize_bars`](@ref), [`bar_levels`](@ref): the bars of a `BarGraph` as
+  the kernel stores them and their alarm levels (IND-102).
+
+## Supervisory objects
+
+A host that owns the state of these widgets applies the operator actions the
+front end sends as messages with the same rules as the Python kernel:
+
+- [`normalize_machine`](@ref), [`next_state`](@ref),
+  [`available_commands`](@ref): state machine models and commands (IND-060 ..
+  IND-065), presets included.
+- [`operator_set`](@ref), [`loop_mode_change`](@ref), [`sp_limits`](@ref):
+  the operator rules of a `PIDFaceplate` (IND-030 .. IND-034).
+- [`AnnunciatorPanel`](@ref), [`annunciator_transition`](@ref),
+  [`annunciator_set`](@ref), [`annunciator_action`](@ref), [`horn_on`](@ref):
+  ISA-18.1 sequences A, M and R, first out and horn (IND-040 .. IND-043).
+- [`acknowledge_rows`](@ref), [`shelve_row`](@ref), [`unshelve_row`](@ref),
+  [`expire_shelving`](@ref), [`keep_row`](@ref): the alarm banner and the alarm
+  list (SCADA-006, SCADA-007, IND-050 .. IND-053).
+
+```@example rules
+m = normalize_machine(Dict("states" => [Dict("name" => "Off"), Dict("name" => "On")],
+                           "transitions" => [["Off", "Start", "On"], ["On", "Stop", "Off"]]))
+next_state(m, "Off", "Start"), available_commands(m, "On")
+```

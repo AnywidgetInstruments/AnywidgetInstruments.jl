@@ -31,11 +31,16 @@ export Instrument, instrument, widget_class, traits, update, merge_traits, class
 export encode_buffer, Message, message, heartbeat_message, append_message, snapshot_message
 export send_message, set_transport!
 export alarm_level, coerce_value, valid_scale, normalize_value_labels, value_label_of, value_of_label
+export next_peak, normalize_bars, bar_levels, normalize_machine, next_state, available_commands
+export sp_limits, operator_set, loop_mode_change
+export AnnunciatorPanel, annunciator_transition, annunciator_set, annunciator_action, horn_on
+export acknowledge_rows, shelve_row, unshelve_row, expire_shelving, keep_row
 export html_page, set_asset_base!
 
 include("assets.jl")
 include("encoding.jl")
 include("logic.jl")
+include("rules.jl")
 include("instrument.jl")
 include("widgets.jl")
 include("messages.jl")

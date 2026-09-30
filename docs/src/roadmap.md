@@ -26,7 +26,8 @@ they are not releases.
 ## Phase 2 — `0.0.3`: more shared rules
 
 - Julia ports of the other parity files: annunciator sequences, state machine
-  transitions, PID faceplate, alarm list and banner, bar graphs, peak hold.
+  transitions, PID faceplate, alarm list and banner, bar graphs, peak hold
+  (done, JL-LOG-005 .. JL-LOG-010).
 - Message builders for `WaveformChart`, `IntensityChart`, `XYGraph` and the
   digital graphs.
 
